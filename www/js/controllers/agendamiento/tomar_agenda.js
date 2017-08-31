@@ -2,8 +2,6 @@ angular.module('movistar')
 
 .controller('AgendamientoTomarAgendaController', function($scope, geo, ionicDatePicker) {
 
-
-
   $scope.geoMessage = "";
 
   $scope.fechaSeleccionada = null;
@@ -19,14 +17,14 @@ angular.module('movistar')
       from: hoy,
       inputDate: proxMes,
       mondayFirst: true,
-      setLabel: '<i class="icon ion-checkmark"></i>',
-      closeLabel: '<i class="icon ion-close"></i>',
+      setLabel: 'Elegir',
+      closeLabel: 'Cancelar',
       todayLabel: 'Hoy',
       //disableWeekdays: [0],
       weeksList: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sa"],
       monthsList: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sept", "Oct", "Nov", "Dic"],
       closeOnSelect: false,
-      templateType: 'popup'
+      templateType: 'modal'
     };
     $scope.openDatePicker = function(){
       ionicDatePicker.openDatePicker(calendar);
