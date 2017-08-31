@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('movistar', ['ionic'])
+angular.module('movistar', ['ionic', 'ngCordova', 'ionic-datepicker'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -31,8 +31,9 @@ angular.module('movistar', ['ionic'])
 
    /* Vistas para la toma de numeros y agenda */
    .state('agendamiento', { url: '/agendamiento', templateUrl: 'templates/agendamiento/home.html', controller: "AgendamientoHomeController" })
-   .state('agendamiento_agenda', { url: '/agendamiento/agenda', templateUrl: 'templates/agendamiento/agenda.html', controller: "AgendamientoAgendaController" })
-   .state('agendamiento_numero', { url: '/agendamiento/numero', templateUrl: 'templates/agendamiento/numero.html', controller: "AgendamientoNumeroController" });
+   .state('agendamiento_tomar_agenda', { url: '/agendamiento/agenda', templateUrl: 'templates/agendamiento/tomar_agenda.html', controller: "AgendamientoTomarAgendaController" })
+   .state('agendamiento_tomar_numero', { url: '/agendamiento/numero', templateUrl: 'templates/agendamiento/tomar_numero.html', controller: "AgendamientoTomarNumeroController" })
+   .state('agendamiento_ver_hora_agendada', { url: '/agendamiento/agenda/ver_hora', templateUrl: 'templates/agendamiento/ver_hora_agendada.html', controller: "AgendamientoVerHoraController" });
 
    $urlRouterProvider.otherwise('/');
 });

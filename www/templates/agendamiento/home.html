@@ -3,13 +3,25 @@
 
     <div class = "list">
 
-      <p>Desea agendar una hora?</p>
 
-      <button class = "button button-full" ui-sref="agendamiento_agenda">Agendar hora</button>
+       <div class="row">
+        Desea agendar una hora?
+        <span ng-show="tieneHoraAgendada">
+          Usted solo puede agendar una hora simultaneamente. Si desea otra hora, puede cancelar o reagendar la hora tomada.
+        </span>
+      </div>
 
-      <p>Prefiero tomar un número</p>
+      <button ng-show="!tieneHoraAgendada" class="button button-full" ui-sref="agendamiento_tomar_agenda">Agendar hora</button>
 
-      <button class = "button button-full" ui-sref="agendamiento_numero">Tomar número</button>
+      <button ng-show="tieneHoraAgendada" class="button button-full" ui-sref="agendamiento_tomar_agenda">Ver hora agendada</button>
+
+      <div class="row">
+        Prefiero tomar un número
+      </div>
+
+      <button class="button button-full" ui-sref="agendamiento_tomar_numero">Tomar número</button>
+
+
 
     </div>
 

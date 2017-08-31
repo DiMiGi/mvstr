@@ -1,0 +1,48 @@
+<ion-view view-title="Agendar hora">
+  <ion-content>
+
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Motivo de atención
+      </div>
+
+      <select>
+        <option selected="true" disabled="disabled">Seleccione su motivo</option>
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+        <option>Option 4</option>
+        <option>Option 5</option>
+        <option>Option 6</option>
+        <option>Option 7</option>
+        <option>Option 8</option>
+        <option>Option 9</option>
+        <option>Option 10</option>
+        <option>Option 11</option>
+
+      </select>
+    </label>
+
+    <div class="row">
+      {{ mesAnio(selectedDate) }}
+    </div>
+
+    <div class="row">
+      <div class="col text-center">
+
+        <button class="button button-block" ng-click="openDatePicker()">
+          <i class="icon ion-calendar"></i>
+          <span ng-show="fechaSeleccionada == null">Seleccione día</span>
+          <span ng-show="fechaSeleccionada != null">{{ fechaSeleccionada | date:'dd MMMM yyyy' }}</span>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <span ng-show="geoMessage.length == 0"><ion-spinner></ion-spinner> Obteniendo localizacion...</span>
+
+      {{ geoMessage }}
+    </div>
+
+
+  </ion-content>
+</ion-view>

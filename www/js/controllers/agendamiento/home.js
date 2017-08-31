@@ -1,7 +1,11 @@
 angular.module('movistar')
 
-.controller('AgendamientoHomeController', ['$scope', function($scope) {
+.controller('AgendamientoHomeController', function($scope) {
 
   console.log("Controlador Home");
 
-}]);
+
+  $scope.tieneHoraAgendada = false;
+
+
+});
