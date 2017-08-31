@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('movistar', ['ionic'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -22,3 +22,17 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+
+.config(function($stateProvider, $urlRouterProvider) {
+   $stateProvider
+
+   /* App base */
+   .state('index', { url: '/', templateUrl: 'home.html'})
+
+   /* Vistas para la toma de numeros y agenda */
+   .state('agendamiento', { url: '/agendamiento', templateUrl: 'templates/agendamiento/home.html', controller: "AgendamientoHomeController" })
+   .state('agendamiento_agenda', { url: '/agendamiento/agenda', templateUrl: 'templates/agendamiento/agenda.html', controller: "AgendamientoAgendaController" })
+   .state('agendamiento_numero', { url: '/agendamiento/numero', templateUrl: 'templates/agendamiento/numero.html', controller: "AgendamientoNumeroController" });
+
+   $urlRouterProvider.otherwise('/');
+});

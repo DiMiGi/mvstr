@@ -1,26 +1,47 @@
-Ionic App Base
-==============
+# Movistar
 
-A starting project for Ionic that optionally supports using custom SCSS.
+## Instalar
 
-## Using this project
+Debe tener Node.js y NPM installado
 
-We recommend using the [Ionic CLI](https://github.com/ionic-team/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
-
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
+Asegurarse que estos comandos arrojen alguna version:
 
 ```bash
-$ npm install -g ionic cordova
+node -v
+npm -v
 ```
 
-Then run:
+Luego instalar Ionic y Cordova globalmente con (puede requerir `sudo`)
 
 ```bash
-$ ionic start myProject tabs --type=ionic1
+npm install -g ionic cordova
 ```
 
-More info on this can be found on the Ionic [Getting Started](https://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/ionic-team/ionic-cli) repo.
+## Ejecutar
 
-## Issues
+### Modo Desarrollo
 
-Issues have been disabled on this repo. If you do find an issue or have a question, consider posting it on the [Ionic Forum](https://forum.ionicframework.com/). If there is truly an error, follow our guidelines for [submitting an issue](https://ionicframework.com/submit-issue/) to the main Ionic repository.
+Ejecutar en el navegador.
+
+```bash
+ionic serve
+```
+
+### En Android
+
+Activar modo desarrollo en Android.
+
+En caso de recibir errores por licencias, ver esta pregunta en StackOverflow https://stackoverflow.com/questions/40383323/cant-accept-license-agreement-android-sdk-platform-24/40383457#40383457 para resolverlo.
+
+Instalar Android-SDK (puede ser Android Studio completo) y luego configurar las rutas, por ejemplo:
+
+```bash
+export ANDROID_HOME=/home/felo/Android/Sdk
+export PATH=${PATH}:/home/felo/Android/Sdk/platform-tools
+```
+
+Finalmente ejecutar con:
+
+```bash
+ionic cordova run android
+```
