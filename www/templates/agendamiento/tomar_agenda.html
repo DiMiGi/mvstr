@@ -1,35 +1,22 @@
 <ion-view view-title="Agendar hora">
   <ion-content>
 
+
+    <!-- Motivo de atencion -->
     <label class="item item-input item-select">
       <div class="input-label">
         Motivo de atención
       </div>
-
       <select>
         <option selected="true" disabled="disabled">Seleccione su motivo</option>
-        <option>Option 1</option>
-        <option>Option 2</option>
-        <option>Option 3</option>
-        <option>Option 4</option>
-        <option>Option 5</option>
-        <option>Option 6</option>
-        <option>Option 7</option>
-        <option>Option 8</option>
-        <option>Option 9</option>
-        <option>Option 10</option>
-        <option>Option 11</option>
-
+        <option ng-repeat="motivo in motivosAtencion">{{ motivo.titulo }}</option>
       </select>
     </label>
 
-    <div class="row">
-      {{ mesAnio(selectedDate) }}
-    </div>
 
+    <!-- Calendario -->
     <div class="row">
       <div class="col text-center">
-
         <button class="button button-block" ng-click="openDatePicker()">
           <i class="icon ion-calendar"></i>
           <span ng-show="fechaSeleccionada == null">Seleccione día</span>
@@ -37,22 +24,83 @@
         </button>
       </div>
     </div>
+
+
+    <!-- Escoger sucursal por geolocalizacion -->
     <div class="row">
-      <span ng-show="geoEstado == 'OBTENIENDO'"><ion-spinner></ion-spinner>Encontrando sucursales cercanas...</span>
-      <span ng-show="geoEstado == 'FALLO'">No se pudo obtener sucursales cercanas <button class="button button-small" ng-click="obtenerSucursalesSugeridas()"><i class="icon ion-refresh"></i></button></span>
-      <span ng-show="geoEstado == 'NO_HAY_SUCURSALES_CERCANAS'">No hay sucursales cercanas a su ubicación.</span>
-      <span ng-show="geoEstado == 'EXITO'">
+        <div class="list" style="width: 100%;">
 
-        <p>Las siguientes sucursales se encuentran cercanas a usted en este momento.</p>
+          <div class="item item-divider">
+            Sucursales cercanas
+          </div>
 
-        <ion-list>
-          <ion-item collection-repeat="sucursal in sucursalesCercanas" class="item item-text-wrap item-borderless">
-            <ion-radio ng-click="sucursalElegida.sucursal = sucursal" ng-value="sucursal">{{ sucursal.direccion }}</ion-radio>
-            <button class="button button-small" ng-click="verMapa(sucursal)">Ver en mapa</button>
-          </ion-item>
-        </ion-list>
+          <div class="item" ng-show="geoEstado == 'OBTENIENDO'">
+            <ion-spinner></ion-spinner>Encontrando sucursales cercanas....</p>
+          </div>
+
+          <div class="item" ng-show="geoEstado == 'FALLO'">
+            <p>No se pudo obtener sucursales cercanas <button class="button button-small" ng-click="obtenerSucursalesSugeridas()"><i class="icon ion-refresh"></i></button></p>
+          </div>
+
+          <div class="item" ng-show="geoEstado == 'NO_HAY_SUCURSALES_CERCANAS'">
+            <p>No hay sucursales cercanas a su ubicación.</p>
+          </div>
+
+
+          <div ng-show="geoEstado == 'EXITO'" class="item item-text-wrap" ng-repeat="sucursal in sucursalesCercanas" style="padding: 5px 5px;">
+            <ion-radio ng-click="sucursalElegida.sucursal = sucursal" ng-value="sucursal" style="border: 0px;">
+              <p>{{ sucursal.direccion }}</p>
+              <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
+            </ion-radio>
+            <button class="button button-small" ng-click="verMapa(sucursal)"><i class="icon ion-location"></i> Ver en mapa</button>
+          </div>
+
+
+          <div class="item item-divider">
+            Buscar sucursal
+          </div>
+
+          <div class="item">
+            <p>Formulario para buscar sucursal</p>
+          </div>
+          <div class="item">
+            <p>Formulario para buscar sucursal</p>
+          </div>
+          <div class="item">
+            <p>Formulario para buscar sucursal</p>
+          </div>
+
+
+
+        </div>
+
+
+
+
+
+        <!--<ion-list>
+          <ul class="list">
+            <li class="item item-text-wrap" collection-repeat="sucursal in sucursalesCercanas" style="padding: 5px 5px;">
+              <ion-radio ng-click="sucursalElegida.sucursal = sucursal" ng-value="sucursal" style="border: 0px;">
+
+                <p>{{ sucursal.direccion }}</p>
+                <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
+
+              </ion-radio>
+              <button class="button button-small" ng-click="verMapa(sucursal)"><i class="icon ion-location"></i> Ver en mapa</button>
+            </li>
+          </ul>
+        </ion-list>-->
       </span>
     </div>
+
+
+
+    <div class="row">
+
+
+    </div>
+
 
 
 

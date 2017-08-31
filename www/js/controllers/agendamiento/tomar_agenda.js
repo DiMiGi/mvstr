@@ -1,7 +1,8 @@
 angular.module('movistar')
 
-.controller('AgendamientoTomarAgendaController', function($scope, geo, ionicDatePicker, sucursal) {
+.controller('AgendamientoTomarAgendaController', function($scope, geo, ionicDatePicker, sucursal, motivo) {
 
+  $scope.motivosAtencion = [];
 
   $scope.sucursalElegida = {
     sucursal: null
@@ -64,6 +65,14 @@ angular.module('movistar')
 
     });
   }
+
+
+
+  motivo.obtenerMotivosAtencion(function(motivos){
+
+    $scope.motivosAtencion = motivos;
+
+  });
 
   $scope.obtenerSucursalesSugeridas();
 
