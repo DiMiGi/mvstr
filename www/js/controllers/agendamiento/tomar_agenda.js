@@ -1,8 +1,11 @@
 angular.module('movistar')
 
-.controller('AgendamientoTomarAgendaController', function($scope, geo, ionicDatePicker) {
+.controller('AgendamientoTomarAgendaController', function($scope, geo, ionicDatePicker, sucursal) {
 
-  $scope.geoMessage = "";
+
+  $scope.sucursalElegida = {
+    sucursal: null
+  };
 
   $scope.fechaSeleccionada = null;
 
@@ -20,16 +23,57 @@ angular.module('movistar')
       setLabel: 'Elegir',
       closeLabel: 'Cancelar',
       todayLabel: 'Hoy',
-      //disableWeekdays: [0],
       weeksList: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sa"],
       monthsList: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sept", "Oct", "Nov", "Dic"],
       closeOnSelect: false,
       templateType: 'modal'
     };
-    $scope.openDatePicker = function(){
-      ionicDatePicker.openDatePicker(calendar);
-    };
 
+  $scope.openDatePicker = function(){
+    ionicDatePicker.openDatePicker(calendar);
+  };
+
+
+  $scope.verMapa = function(sucursal){
+    geo.abrirMapa(sucursal.posicion);
+  }
+
+
+  $scope.obtenerSucursalesSugeridas = function(){
+
+    $scope.geoEstado = "OBTENIENDO";
+
+    geo.obtenerPosicion({ timeout: 10000 }, function(pos){
+
+      if(!pos){
+        $scope.geoEstado = "FALLO";
+        return;
+      }
+
+      /* Luego esta posicion se la pasamos a alguna funcion en el servicio sucursal
+      para encontrar la mas cercana, las N mas cercanas, o algo asi */
+
+      sucursal.encontrarSucursalesCercanas(3, 100, pos, function(sucursales){
+
+
+        if(sucursales && sucursales.length > 0){
+
+          $scope.geoEstado = "EXITO";
+          $scope.sucursalesCercanas = sucursales;
+          $scope.sucursalElegida.sucursal = sucursales[0];
+
+        } else {
+
+          $scope.geoEstado = "NO_HAY_SUCURSALES_CERCANAS";
+          $scope.sucursalesCercanas = [];
+
+        }
+      });
+
+    });
+  }
+
+  $scope.obtenerSucursalesSugeridas();
 
 /*
   $scope.onezoneDatepicker = {
@@ -68,15 +112,7 @@ console.log($scope.onezoneDatepicker)
   }
 */
 
-  geo.obtenerPosicion({ timeout: 10000 }, function(pos){
 
-    if(pos){
-      $scope.geoMessage = "Geo: " + pos.latitud + ", " + pos.longitud;
-    } else {
-      $scope.geoMessage = "No se pudo obtener geolocalizacion.";
-    }
-
-  });
 
 
 });

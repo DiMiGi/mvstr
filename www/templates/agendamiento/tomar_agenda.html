@@ -38,10 +38,22 @@
       </div>
     </div>
     <div class="row">
-      <span ng-show="geoMessage.length == 0"><ion-spinner></ion-spinner> Obteniendo localizacion...</span>
+      <span ng-show="geoEstado == 'OBTENIENDO'"><ion-spinner></ion-spinner>Encontrando sucursales cercanas...</span>
+      <span ng-show="geoEstado == 'FALLO'">No se pudo obtener su localizacion <button class="button button-small" ng-click="obtenerSucursalesSugeridas()"><i class="icon ion-refresh"></i></button></span>
+      <span ng-show="geoEstado == 'NO_HAY_SUCURSALES_CERCANAS'">No hay sucursales cercanas a su ubicación.</span>
+      <span ng-show="geoEstado == 'EXITO'">
 
-      {{ geoMessage }}
+        <p>Las siguientes sucursales se encuentran cercanas a usted en este momento.</p>
+
+        <ion-list>
+          <ion-item collection-repeat="sucursal in sucursalesCercanas" class="item item-text-wrap item-borderless">
+            <ion-radio ng-model="sucursalElegida.sucursal" ng-value="sucursal">{{ sucursal.direccion }}</ion-radio>
+            <button class="button button-small" ng-click="verMapa(sucursal)">Ver en mapa</button>
+          </ion-item>
+        </ion-list>
+      </span>
     </div>
+
 
 
   </ion-content>
