@@ -22,7 +22,7 @@ angular.module('movistar')
       lista[i].distancia = dist;
     }
 
-    lista.sort(function(a, b){return a.distancia - b.distancia});
+    lista.sort(function(a, b){ return a.distancia - b.distancia });
     lista.splice(cuantas);
     callback(lista);
   }

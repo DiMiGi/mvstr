@@ -50,23 +50,15 @@ angular.module('movistar')
         return;
       }
 
-      /* Luego esta posicion se la pasamos a alguna funcion en el servicio sucursal
-      para encontrar la mas cercana, las N mas cercanas, o algo asi */
-
       sucursal.encontrarSucursalesCercanas(3, 100, pos, function(sucursales){
 
-
         if(sucursales && sucursales.length > 0){
-
           $scope.geoEstado = "EXITO";
           $scope.sucursalesCercanas = sucursales;
           $scope.sucursalElegida.sucursal = sucursales[0];
-
         } else {
-
           $scope.geoEstado = "NO_HAY_SUCURSALES_CERCANAS";
           $scope.sucursalesCercanas = [];
-
         }
       });
 

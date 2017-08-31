@@ -39,7 +39,7 @@
     </div>
     <div class="row">
       <span ng-show="geoEstado == 'OBTENIENDO'"><ion-spinner></ion-spinner>Encontrando sucursales cercanas...</span>
-      <span ng-show="geoEstado == 'FALLO'">No se pudo obtener su localizacion <button class="button button-small" ng-click="obtenerSucursalesSugeridas()"><i class="icon ion-refresh"></i></button></span>
+      <span ng-show="geoEstado == 'FALLO'">No se pudo obtener sucursales cercanas <button class="button button-small" ng-click="obtenerSucursalesSugeridas()"><i class="icon ion-refresh"></i></button></span>
       <span ng-show="geoEstado == 'NO_HAY_SUCURSALES_CERCANAS'">No hay sucursales cercanas a su ubicación.</span>
       <span ng-show="geoEstado == 'EXITO'">
 
@@ -47,7 +47,7 @@
 
         <ion-list>
           <ion-item collection-repeat="sucursal in sucursalesCercanas" class="item item-text-wrap item-borderless">
-            <ion-radio ng-model="sucursalElegida.sucursal" ng-value="sucursal">{{ sucursal.direccion }}</ion-radio>
+            <ion-radio ng-click="sucursalElegida.sucursal = sucursal" ng-value="sucursal">{{ sucursal.direccion }}</ion-radio>
             <button class="button button-small" ng-click="verMapa(sucursal)">Ver en mapa</button>
           </ion-item>
         </ion-list>
