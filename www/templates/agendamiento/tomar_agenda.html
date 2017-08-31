@@ -26,13 +26,16 @@
     </div>
 
 
-    <!-- Escoger sucursal por geolocalizacion -->
+    <!-- Metodos de busqueda (cambiar entre geolocalizacion o manual) -->
     <div class="row">
-        <div class="list" style="width: 100%;">
+      <button ng-show="usandoGeolocalizacion" ng-click="usarManual()" class="button button-positive"><i class="icon ion-search"></i> Buscar sucursal manualmente</button>
+      <button ng-show="!usandoGeolocalizacion" ng-click="usarGeo()"class="button button-positive"><i class="icon ion-location"></i> Buscar sucursales cercanas</button>
+    </div>
 
-          <div class="item item-divider">
-            Sucursales cercanas
-          </div>
+    <!-- Escoger sucursal por geolocalizacion -->
+    <div class="row" ng-show="usandoGeolocalizacion">
+
+        <div class="list" style="width: 100%;">
 
           <div class="item" ng-show="geoEstado == 'OBTENIENDO'">
             <ion-spinner></ion-spinner>Encontrando sucursales cercanas....</p>
@@ -46,7 +49,6 @@
             <p>No hay sucursales cercanas a su ubicación.</p>
           </div>
 
-
           <div ng-show="geoEstado == 'EXITO'" class="item item-text-wrap" ng-repeat="sucursal in sucursalesCercanas" style="padding: 5px 5px;">
             <ion-radio ng-click="sucursalElegida.sucursal = sucursal" ng-value="sucursal" style="border: 0px;">
               <p>{{ sucursal.direccion }}</p>
@@ -54,52 +56,19 @@
             </ion-radio>
             <button class="button button-small" ng-click="verMapa(sucursal)"><i class="icon ion-location"></i> Ver en mapa</button>
           </div>
-
-
-          <div class="item item-divider">
-            Buscar sucursal
-          </div>
-
-          <div class="item">
-            <p>Formulario para buscar sucursal</p>
-          </div>
-          <div class="item">
-            <p>Formulario para buscar sucursal</p>
-          </div>
-          <div class="item">
-            <p>Formulario para buscar sucursal</p>
-          </div>
-
-
-
         </div>
-
-
-
-
-
-        <!--<ion-list>
-          <ul class="list">
-            <li class="item item-text-wrap" collection-repeat="sucursal in sucursalesCercanas" style="padding: 5px 5px;">
-              <ion-radio ng-click="sucursalElegida.sucursal = sucursal" ng-value="sucursal" style="border: 0px;">
-
-                <p>{{ sucursal.direccion }}</p>
-                <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
-
-              </ion-radio>
-              <button class="button button-small" ng-click="verMapa(sucursal)"><i class="icon ion-location"></i> Ver en mapa</button>
-            </li>
-          </ul>
-        </ion-list>-->
-      </span>
     </div>
 
+    <div class="row" ng-show="!usandoGeolocalizacion">
 
-
-    <div class="row">
-
-
+        <p>Formulario para buscar manualmente</p>
+        <p>Formulario para buscar manualmente</p>
+        <p>Formulario para buscar manualmente</p>
+        <p>Formulario para buscar manualmente</p>
+        <p>Formulario para buscar manualmente</p>
+        <p>Formulario para buscar manualmente</p>
     </div>
+
 
 
 
