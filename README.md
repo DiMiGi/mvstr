@@ -2,7 +2,7 @@
 
 ## Instalar
 
-Debe tener Node.js y NPM installado
+Debe tener Node.js y NPM instalado.
 
 Asegurarse que estos comandos arrojen alguna version:
 
@@ -39,6 +39,8 @@ Instalar Android-SDK (puede ser Android Studio completo) y luego configurar las 
 export ANDROID_HOME=/home/felo/Android/Sdk
 export PATH=${PATH}:/home/felo/Android/Sdk/platform-tools
 ```
+
+O configurar el `PATH` en Windows si es que se usa Windows.
 
 Finalmente ejecutar con:
 
