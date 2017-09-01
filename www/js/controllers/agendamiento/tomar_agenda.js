@@ -12,17 +12,6 @@ angular.module('movistar')
   // y vuelve a fallar, la idea es que ya no se redireccione. Para eso sirve esta bandera.
   var usuarioEligioMetodoBusqueda = false;
 
-
-  $scope.usarGeo = function(){
-    $scope.usandoGeolocalizacion = true;
-    usuarioEligioMetodoBusqueda = true;
-  }
-
-  $scope.usarManual = function(){
-    $scope.usandoGeolocalizacion = false;
-    usuarioEligioMetodoBusqueda = true;
-  }
-
   $scope.sucursalElegida = {
     sucursal: null
   };
@@ -49,6 +38,7 @@ angular.module('movistar')
       templateType: 'modal'
     };
 
+
   $scope.openDatePicker = function(){
     ionicDatePicker.openDatePicker(calendar);
   };
@@ -56,6 +46,16 @@ angular.module('movistar')
 
   $scope.verMapa = function(sucursal){
     geo.abrirMapa(sucursal.posicion);
+  }
+
+  $scope.usarGeo = function(){
+    $scope.usandoGeolocalizacion = true;
+    usuarioEligioMetodoBusqueda = true;
+  }
+
+  $scope.usarManual = function(){
+    $scope.usandoGeolocalizacion = false;
+    usuarioEligioMetodoBusqueda = true;
   }
 
 
@@ -104,44 +104,6 @@ angular.module('movistar')
   });
 
   $scope.obtenerSucursalesSugeridas();
-
-/*
-  $scope.onezoneDatepicker = {
-    date: new Date(),
-    mondayFirst: true,
-    months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    ],
-    daysOfTheWeek: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sa"],
-    startDate: new Date(),
-    //endDate: endDate,
-    disablePastDays: false,
-    disableSwipe: false,
-    disableWeekend: false,
-    showDatepicker: true,
-    showTodayButton: false,
-    calendarMode: false,
-    hideCancelButton: false,
-    hideSetButton: false,
-    callback: function(value){
-      $scope.fechaSeleccionada = value;
-    }
-  };*/
-
-/*
-console.log($scope.onezoneDatepicker)
-*/
-
-/*
-  $scope.mesAnio = function(date){
-
-    var mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    ];
-    return mes[date.getMonth()] + " " + date.getFullYear();
-  }
-*/
-
 
 
 

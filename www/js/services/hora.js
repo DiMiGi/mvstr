@@ -20,11 +20,20 @@ angular.module('movistar')
 
 
 
+  function eliminarHora(callback){
+    var err = null;
 
-  function tieneHoraAgendada(callback){
-    callback(false);
+    // Probando la demora
+    setTimeout(function(){ callback(err); }, 1000);
 
   }
 
-  return { obtenerHoraAgendada, tieneHoraAgendada };
+
+
+  function tieneHoraAgendada(callback){
+    callback(true);
+
+  }
+
+  return { obtenerHoraAgendada, tieneHoraAgendada, eliminarHora };
  });
