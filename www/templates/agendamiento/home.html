@@ -1,19 +1,20 @@
-<ion-view view-title="Agendar hora">
+<ion-view view-title="Agendar hora o numero, menu principal">
   <ion-content>
 
     <div class = "list">
 
-
        <div class="row">
-        Desea agendar una hora?
-        <span ng-show="tieneHoraAgendada">
-          Usted solo puede agendar una hora simultaneamente. Si desea otra hora, puede cancelar o reagendar la hora tomada.
-        </span>
+         <div>
+          <p>Desea agendar una hora?</p>
+          <p ng-show="tieneHoraAgendada">
+            Usted solo puede agendar una hora simultaneamente. Si desea otra hora, puede cancelar o reagendar la hora tomada.
+          </p>
+        </div>
       </div>
 
       <button ng-show="!tieneHoraAgendada" class="button button-full" ui-sref="agendamiento_tomar_agenda">Agendar hora</button>
 
-      <button ng-show="tieneHoraAgendada" class="button button-full" ui-sref="agendamiento_tomar_agenda">Ver hora agendada</button>
+      <button ng-show="tieneHoraAgendada" class="button button-full" ui-sref="agendamiento_ver_hora_agendada">Ver hora agendada</button>
 
       <div class="row">
         Prefiero tomar un número

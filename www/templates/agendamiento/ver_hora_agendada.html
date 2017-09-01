@@ -1,1 +1,33 @@
-Ver hora agendada
+<ion-view view-title="Ver hora agendada">
+  <ion-content>
+
+    <div ng-show="horaAgendada != null">
+      <div class="row">
+          <div class="col col-20" style="text-align: right"><i class="icon ion-clock"></i></div>
+          <div class="col">{{ horaAgendada.fecha | date:'HH:mm' }}</div>
+      </div>
+
+      <div class="row">
+          <div class="col col-20" style="text-align: right"><i class="icon ion-calendar"></i></div>
+          <div class="col">{{ horaAgendada.fecha | date:'dd MMMM yyyy' }}</div>
+      </div>
+
+      <div class="row">
+          <div class="col col-20" style="text-align: right">Sucursal</div>
+          <div class="col">{{ horaAgendada.sucursal.direccion }}</div>
+      </div>
+
+      <div class="row">
+          <div class="col col-20" style="text-align: right">Lugar</div>
+          <div class="col"><button class="button" ng-click="verMapa()"><i class="icon ion-location"></i> Ver Mapa</button></div>
+      </div>
+
+    </div>
+
+    <div class="bar bar-footer">
+      <button class="button button"><i class="icon ion-calendar"></i> Reagendar</button>
+      <button class="button button-assertive"><i class="icon ion-close"></i> Eliminar</button>
+    </div>
+
+  </ion-content>
+</ion-view>
