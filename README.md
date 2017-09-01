@@ -29,9 +29,7 @@ ionic serve
 
 ### En Android
 
-Activar modo desarrollo en Android.
-
-En caso de recibir errores por licencias, ver esta pregunta en StackOverflow https://stackoverflow.com/questions/40383323/cant-accept-license-agreement-android-sdk-platform-24/40383457#40383457 para resolverlo.
+Activar modo desarrollo en tu dispositivo Android.
 
 Instalar Android-SDK (puede ser Android Studio completo) y luego configurar las rutas, por ejemplo:
 
@@ -40,6 +38,8 @@ export ANDROID_HOME=/home/felo/Android/Sdk
 export PATH=${PATH}:/home/felo/Android/Sdk/platform-tools
 ```
 
+(Esas lineas las puse en el archivo `/home/felo/.bashrc` en Linux)
+
 O configurar el `PATH` en Windows si es que se usa Windows.
 
 Finalmente ejecutar con:
@@ -47,3 +47,5 @@ Finalmente ejecutar con:
 ```bash
 ionic cordova run android
 ```
+
+En caso de recibir errores por licencias, ver esta pregunta en StackOverflow https://stackoverflow.com/questions/40383323/cant-accept-license-agreement-android-sdk-platform-24/40383457#40383457 para resolverlo.
