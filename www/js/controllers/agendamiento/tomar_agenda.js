@@ -5,23 +5,13 @@ angular.module('movistar')
   $scope.motivosAtencion = [];
   $scope.usandoGeolocalizacion = true;
 
+  // En esta variable se cargan las regiones, con sus comunas y sucursales,
+  // para poder escoger manualmente
+  $scope.regiones = null;
 
-  $scope.busquedaManual = {
-    regiones: null,
-    comunas: null,
-    sucursales: null
-  }
-
-
-  // Cuando el usuario abre la vista de agenda por primera vez, y la geolocalizacion
-  // ha fallado, la idea es redireccionar al usuario a la vista de busqueda manual.
-  // Sin embargo, si el usuario decide el mismo ir a la vista de busqueda por geolocalizacion,
-  // y vuelve a fallar, la idea es que ya no se redireccione. Para eso sirve esta bandera.
-  var usuarioEligioMetodoBusqueda = false;
 
   $scope.sucursalElegida = {
-    sugerida: null,
-    manual: null
+    sucursal: null
   };
 
   $scope.fechaSeleccionada = null;
@@ -56,25 +46,51 @@ angular.module('movistar')
     geo.abrirMapa(sucursal.posicion);
   }
 
-  $scope.usarGeo = function(){
+
+
+
+  /*
+  * Cambia a la pestana de geolocalizacion. Si el argumento
+  * es verdadero, se redirecciona a la pestana de 'busqueda manual'
+  * en caso que la geolocalizacion falle.
+  *
+  */
+  $scope.usarGeo = function(redireccionar){
     $scope.usandoGeolocalizacion = true;
-    usuarioEligioMetodoBusqueda = true;
-    $scope.obtenerSucursalesSugeridas();
+
+    // Para evitar errores raros, desmarco la sucursal elegida
+    $scope.sucursalElegida.sucursal = null;
+
+    $scope.obtenerSucursalesSugeridas(function(exito){
+      if(!exito && redireccionar)
+        $scope.usarManual();
+    });
   }
 
   $scope.usarManual = function(){
     $scope.usandoGeolocalizacion = false;
-    usuarioEligioMetodoBusqueda = true;
+
+    // Para evitar errores raros, desmarco la sucursal elegida
+    $scope.sucursalElegida.sucursal = null;
+
     // Si aun no se han obtenido las regiones, obtenerlas.
-    if($scope.busquedaManual.regiones == null){
+    if($scope.regiones == null){
       sucursal.obtenerRegionCiudadSucursal(function(regiones){
-        $scope.busquedaManual.regiones = regiones;
+        $scope.regiones = regiones;
       });
     }
   }
 
 
-  $scope.obtenerSucursalesSugeridas = function(){
+
+  /*
+  * Obtiene sucursales sugeridas, se le pasa true o false al
+  * callback en caso que se pueda o no pueda obtener sucursales cercanas.
+  *
+  */
+  $scope.obtenerSucursalesSugeridas = function(callback){
+
+    if(typeof callback !== "function") callback = () => {}; // Funcion lambda vacia
 
     $scope.geoEstado = "OBTENIENDO";
 
@@ -82,11 +98,7 @@ angular.module('movistar')
 
       if(!pos){
         $scope.geoEstado = "FALLO";
-
-        if(!usuarioEligioMetodoBusqueda){
-          $scope.usarManual();
-        }
-
+        callback(false);
         return;
       }
 
@@ -95,18 +107,14 @@ angular.module('movistar')
         if(sucursales && sucursales.length > 0){
           $scope.geoEstado = "EXITO";
           $scope.sucursalesCercanas = sucursales;
-          $scope.sucursalElegida.sugerida = sucursales[0];
+          $scope.sucursalElegida.sucursal = sucursales[0];
+          callback(true);
         } else {
           $scope.geoEstado = "NO_HAY_SUCURSALES_CERCANAS";
           $scope.sucursalesCercanas = [];
-
-          if(!usuarioEligioMetodoBusqueda){
-            $scope.usarManual();
-          }
-
+          callback(false);
         }
       });
-
     });
   }
 
@@ -118,7 +126,7 @@ angular.module('movistar')
 
   });
 
-  $scope.usarGeo();
+  $scope.usarGeo(true);
 
 
 });

@@ -29,7 +29,7 @@
     <!-- Metodos de busqueda (cambiar entre geolocalizacion o manual) -->
     <div class="row">
       <button ng-show="usandoGeolocalizacion" ng-click="usarManual()" class="button button-positive"><i class="icon ion-search"></i> Buscar sucursal manualmente</button>
-      <button ng-show="!usandoGeolocalizacion" ng-click="usarGeo()"class="button button-positive"><i class="icon ion-location"></i> Buscar sucursales cercanas</button>
+      <button ng-show="!usandoGeolocalizacion" ng-click="usarGeo(false)"class="button button-positive"><i class="icon ion-location"></i> Buscar sucursales cercanas</button>
     </div>
 
     <!-- Escoger sucursal por geolocalizacion -->
@@ -50,7 +50,7 @@
           </div>
 
           <div ng-show="geoEstado == 'EXITO'" class="item item-text-wrap sucursal-item" ng-repeat="sucursal in sucursalesCercanas">
-            <ion-radio class="sucursal-radio" ng-model="sucursalElegida.sugerida" ng-value="sucursal">
+            <ion-radio class="sucursal-radio" ng-model="sucursalElegida.sucursal" ng-value="sucursal">
               <p>{{ sucursal.direccion }}</p>
               <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
             </ion-radio>
@@ -70,7 +70,9 @@
         <div class="input-label">
           Región
         </div>
-        <select ng-model="regionSeleccionada" ng-options="region as region.region for region in busquedaManual.regiones"></select>
+
+        <!-- ng-change="..." es para que cuando cambie de region, se desmarque la sucursal que estaba elegida -->
+        <select ng-model="regionSeleccionada" ng-options="region as region.region for region in regiones" ng-change="sucursalElegida.sucursal = null"></select>
       </label>
 
       <!-- Escoger la comuna -->
@@ -78,12 +80,13 @@
         <div class="input-label">
           Comuna
         </div>
-        <select ng-model="comunaSeleccionada" ng-options="comuna.comuna for comuna in regionSeleccionada.comunas"></select>
+        <!-- ng-change="..." es para que cuando cambie de comuna, se desmarque la sucursal que estaba elegida -->
+        <select ng-model="comunaSeleccionada" ng-options="comuna.comuna for comuna in regionSeleccionada.comunas" ng-change="sucursalElegida.sucursal = null"></select>
       </label>
 
       <!-- Escoger la sucursal -->
       <div class="item item-text-wrap sucursal-item" ng-repeat="sucursal in comunaSeleccionada.sucursales">
-        <ion-radio class="sucursal-radio" ng-model="sucursalElegida.manual" ng-value="sucursal">
+        <ion-radio class="sucursal-radio" ng-model="sucursalElegida.sucursal" ng-value="sucursal">
           <p>{{ sucursal.direccion }}</p>
           <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
         </ion-radio>
@@ -92,14 +95,13 @@
     </div>
 
 
-    <!--
+
     <h3>Debug:</h3>
-    <p>La sucursal elegida (pestana geolocalizacion), es la ID: {{ sucursalElegida.sugerida.id }}</p>
-    <p>La sucursal elegida (pestana busqueda manual), es la ID: {{ sucursalElegida.manual.id }}</p>
+    <p>La sucursal elegida, es la ID: {{ sucursalElegida.sucursal.id }}</p>
     <p>Se tomara como decision final el que es
     <b ng-show="usandoGeolocalizacion">geolocalizacion</b>
     <b ng-show="!usandoGeolocalizacion">manual</b>, por lo tanto hay que validar que ese no sea NULL</p>
-    -->
+
 
   </ion-content>
 </ion-view>
