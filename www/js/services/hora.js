@@ -15,7 +15,7 @@ angular.module('movistar')
       motivo: "Falla tecnica"
     }
 
-    callback(hora);
+    callback(null);
   }
 
 
@@ -31,7 +31,7 @@ angular.module('movistar')
 
 
   function tieneHoraAgendada(callback){
-    callback(true);
+    callback(false);
 
   }
 

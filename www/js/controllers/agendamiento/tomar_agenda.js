@@ -6,6 +6,13 @@ angular.module('movistar')
   $scope.usandoGeolocalizacion = true;
 
 
+  $scope.busquedaManual = {
+    regiones: null,
+    comunas: null,
+    sucursales: null
+  }
+
+
   // Cuando el usuario abre la vista de agenda por primera vez, y la geolocalizacion
   // ha fallado, la idea es redireccionar al usuario a la vista de busqueda manual.
   // Sin embargo, si el usuario decide el mismo ir a la vista de busqueda por geolocalizacion,
@@ -13,7 +20,8 @@ angular.module('movistar')
   var usuarioEligioMetodoBusqueda = false;
 
   $scope.sucursalElegida = {
-    sucursal: null
+    sugerida: null,
+    manual: null
   };
 
   $scope.fechaSeleccionada = null;
@@ -51,11 +59,18 @@ angular.module('movistar')
   $scope.usarGeo = function(){
     $scope.usandoGeolocalizacion = true;
     usuarioEligioMetodoBusqueda = true;
+    $scope.obtenerSucursalesSugeridas();
   }
 
   $scope.usarManual = function(){
     $scope.usandoGeolocalizacion = false;
     usuarioEligioMetodoBusqueda = true;
+    // Si aun no se han obtenido las regiones, obtenerlas.
+    if($scope.busquedaManual.regiones == null){
+      sucursal.obtenerRegionCiudadSucursal(function(regiones){
+        $scope.busquedaManual.regiones = regiones;
+      });
+    }
   }
 
 
@@ -80,7 +95,7 @@ angular.module('movistar')
         if(sucursales && sucursales.length > 0){
           $scope.geoEstado = "EXITO";
           $scope.sucursalesCercanas = sucursales;
-          $scope.sucursalElegida.sucursal = sucursales[0];
+          $scope.sucursalElegida.sugerida = sucursales[0];
         } else {
           $scope.geoEstado = "NO_HAY_SUCURSALES_CERCANAS";
           $scope.sucursalesCercanas = [];
@@ -103,8 +118,7 @@ angular.module('movistar')
 
   });
 
-  $scope.obtenerSucursalesSugeridas();
-
+  $scope.usarGeo();
 
 
 });

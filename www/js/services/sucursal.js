@@ -2,6 +2,76 @@ angular.module('movistar')
 
 .factory('sucursal', function(geo) {
 
+  // Esta funcion obtiene un mapa con las regiones, con las comunas anidadas,
+  // y con las sucursales anidadas.
+  function obtenerRegionCiudadSucursal(callback){
+
+
+    var ohiggins = {
+      region: "Region VI O'higgins",
+      comunas: [
+        {
+          comuna: "Rancagua",
+          sucursales: [
+            {
+              id: 10,
+              direccion: "Campos #123"
+            },
+            {
+              id: 11,
+              direccion: "Miguel Ramirez #123"
+            },
+            {
+              id: 12,
+              direccion: "Carretera del cobre #123"
+            }
+          ]
+        },
+        {
+          comuna: "San Fernando",
+          sucursales: [
+            {
+              id: 13,
+              direccion: "Calle principal de San Fernando #123"
+            }
+          ]
+        }
+      ]
+    };
+
+    var metropolitana = {
+      region: "Region metropolitana",
+      comunas: [
+        {
+          comuna: "Providencia",
+          sucursales: [
+            {
+              id: 14,
+              direccion: "Calle providencia 1 #123"
+            },
+            {
+              id: 15,
+              direccion: "Calle providencia 2 #123"
+            },
+            {
+              id: 16,
+              direccion: "Calle providencia 3 #123"
+            }
+          ]
+        }
+      ]
+    };
+
+
+
+    var sucursales = [ohiggins, metropolitana];
+
+    callback(sucursales);
+
+  }
+
+
+
   function encontrarSucursalesCercanas(cuantas, distanciaMaxima, posicion, callback){
 
     // distanciaMaxima hay que tener cuidado porque las distancias aca son por coordenadas.
@@ -28,5 +98,5 @@ angular.module('movistar')
   }
 
 
-  return { encontrarSucursalesCercanas };
+  return { encontrarSucursalesCercanas, obtenerRegionCiudadSucursal };
  });

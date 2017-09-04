@@ -49,8 +49,8 @@
             <p>No hay sucursales cercanas a su ubicación.</p>
           </div>
 
-          <div ng-show="geoEstado == 'EXITO'" class="item item-text-wrap" ng-repeat="sucursal in sucursalesCercanas" style="padding: 5px 5px;">
-            <ion-radio ng-click="sucursalElegida.sucursal = sucursal" ng-value="sucursal" style="border: 0px;">
+          <div ng-show="geoEstado == 'EXITO'" class="item item-text-wrap sucursal-item" ng-repeat="sucursal in sucursalesCercanas">
+            <ion-radio class="sucursal-radio" ng-model="sucursalElegida.sugerida" ng-value="sucursal">
               <p>{{ sucursal.direccion }}</p>
               <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
             </ion-radio>
@@ -59,21 +59,47 @@
         </div>
     </div>
 
-    <div class="row" ng-show="!usandoGeolocalizacion">
 
-      <span>
-        <p>Formulario para buscar manualmente</p>
-        <p>Formulario para buscar manualmente</p>
-        <p>Formulario para buscar manualmente</p>
-        <p>Formulario para buscar manualmente</p>
-        <p>Formulario para buscar manualmente</p>
-        <p>Formulario para buscar manualmente</p>
-      </span>
+
+    <!-- Busqueda manual de sucursal -->
+
+    <div ng-show="!usandoGeolocalizacion">
+
+      <!-- Escoger la región -->
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Región
+        </div>
+        <select ng-model="regionSeleccionada" ng-options="region as region.region for region in busquedaManual.regiones"></select>
+      </label>
+
+      <!-- Escoger la comuna -->
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Comuna
+        </div>
+        <select ng-model="comunaSeleccionada" ng-options="comuna.comuna for comuna in regionSeleccionada.comunas"></select>
+      </label>
+
+      <!-- Escoger la sucursal -->
+      <div class="item item-text-wrap sucursal-item" ng-repeat="sucursal in comunaSeleccionada.sucursales">
+        <ion-radio class="sucursal-radio" ng-model="sucursalElegida.manual" ng-value="sucursal">
+          <p>{{ sucursal.direccion }}</p>
+          <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
+        </ion-radio>
+        <button class="button button-small" ng-click="verMapa(sucursal)"><i class="icon ion-location"></i> Ver en mapa</button>
+      </div>
     </div>
 
 
-
-
+    <!--
+    <h3>Debug:</h3>
+    <p>La sucursal elegida (pestana geolocalizacion), es la ID: {{ sucursalElegida.sugerida.id }}</p>
+    <p>La sucursal elegida (pestana busqueda manual), es la ID: {{ sucursalElegida.manual.id }}</p>
+    <p>Se tomara como decision final el que es
+    <b ng-show="usandoGeolocalizacion">geolocalizacion</b>
+    <b ng-show="!usandoGeolocalizacion">manual</b>, por lo tanto hay que validar que ese no sea NULL</p>
+    -->
 
   </ion-content>
 </ion-view>

@@ -4,6 +4,10 @@ angular.module('movistar')
 
   var o = {};
 
+  /*
+  * Abre el mapa usando el mapa por defecto en el dispositivo
+  *
+  */
   o.abrirMapa = function(pos){
 
     if(!pos.hasOwnProperty("longitud") || !pos.hasOwnProperty("latitud")){
@@ -21,6 +25,11 @@ angular.module('movistar')
     window.open(geoString, '_system');
   }
 
+
+  /*
+  * Obtiene la posicion usando la geolocalizacion del dispositivo
+  *
+  */
   o.obtenerPosicion = function(opciones, callback){
 
     $cordovaGeolocation.getCurrentPosition(opciones).then(function(position){
