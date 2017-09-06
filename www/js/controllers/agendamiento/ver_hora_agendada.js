@@ -4,8 +4,6 @@ angular.module('movistar')
 
   console.log("Controlador ver hora agendada");
 
-  $scope.horaAgendada = null;
-  $scope.eliminandoHora = false;
 
   $scope.verMapa = function(){
     geo.abrirMapa($scope.horaAgendada.sucursal.posicion);
@@ -22,7 +20,7 @@ angular.module('movistar')
 
     confirm.then(function(res) {
       if(res){
-        $scope.eliminandoHora = true;
+        $scope.estado = 'ELIMINANDO';
         hora.eliminarHora(function(){
           $state.go("agendamiento");
         });
@@ -31,14 +29,28 @@ angular.module('movistar')
   }
 
 
-  hora.obtenerHoraAgendada(function(hora){
 
-    if(!hora){
-      // Error, deberia volver al inicio de la aplicacion.
-      $state.go("agendamiento");
-    }
+  $scope.$on('$ionicView.beforeEnter', function(){
 
-    $scope.horaAgendada = hora;
+    // Esto es para volver a cargar cada vez que se entra a esta vista.
+    // (Porque a veces hay que modificar el ciclo de vida de las vistas
+    // de la manera como uno quiere)
+
+    $scope.horaAgendada = null;
+
+    $scope.estado = 'OBTENIENDO';
+
+    hora.obtenerHoraAgendada(function(hora){
+
+      if(!hora){
+        // Error, deberia volver al inicio de la aplicacion.
+        $state.go("agendamiento");
+      }
+
+      $scope.horaAgendada = hora;
+      $scope.estado = 'EXITO';
+    });
+
   });
 
 });

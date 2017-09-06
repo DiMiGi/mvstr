@@ -2,13 +2,13 @@ angular.module('movistar')
 
 .controller('AgendamientoHomeController', function($scope, hora) {
 
-  console.log("Controlador Home");
+  $scope.$on('$ionicView.beforeEnter', function(){
 
-  hora.tieneHoraAgendada(function(tiene){
-    $scope.tieneHoraAgendada = tiene;
+    $scope.tieneHoraAgendada = 'OBTENIENDO';
+    hora.tieneHoraAgendada(function(tiene){
+      $scope.tieneHoraAgendada = tiene;
+    });
+
   });
-
-
-
 
 });

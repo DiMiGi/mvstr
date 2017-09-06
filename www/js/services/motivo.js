@@ -1,6 +1,6 @@
 angular.module('movistar')
 
-.factory('motivo', function(geo) {
+.factory('motivo', function(geo, $timeout) {
 
   function obtenerMotivosAtencion(callback){
 
@@ -12,7 +12,12 @@ angular.module('movistar')
     lista.push({ id: 4, titulo: "Otro motivo", minutosAtencion: 30 });
     lista.push({ id: 5, titulo: "Y otro motivo mas", minutosAtencion: 60 });
 
-    callback(lista);
+
+    $timeout(function(){
+      callback(lista);
+    }, 1100);
+
+
   }
 
   return { obtenerMotivosAtencion };

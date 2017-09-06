@@ -1,5 +1,9 @@
 <ion-view view-title="Ver hora agendada">
-  <ion-content ng-show="!eliminandoHora">
+
+
+  <!-- -->
+
+  <ion-content ng-show="estado == 'EXITO'">
 
     <div ng-show="horaAgendada != null">
       <div class="row">
@@ -30,8 +34,11 @@
     </div>
   </ion-content>
 
+  <ion-content ng-show="estado == 'OBTENIENDO'">
+    <p><ion-spinner></ion-spinner> Cargando hora agendada....</p>
+  </ion-content>
 
-  <ion-content ng-show="eliminandoHora">
+  <ion-content ng-show="estado == 'ELIMINANDO'">
     <p><ion-spinner></ion-spinner> Eliminando hora....</p>
   </ion-content>
 

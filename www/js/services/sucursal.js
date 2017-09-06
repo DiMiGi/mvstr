@@ -1,6 +1,6 @@
 angular.module('movistar')
 
-.factory('sucursal', function(geo) {
+.factory('sucursal', function(geo, $timeout) {
 
   // Esta funcion obtiene un mapa con las regiones, con las comunas anidadas,
   // y con las sucursales anidadas.
@@ -66,7 +66,12 @@ angular.module('movistar')
 
     var sucursales = [ohiggins, metropolitana];
 
-    callback(sucursales);
+
+
+    $timeout(function(){
+      callback(sucursales);
+    }, 3000);
+
 
   }
 
@@ -94,7 +99,12 @@ angular.module('movistar')
 
     lista.sort(function(a, b){ return a.distancia - b.distancia });
     lista.splice(cuantas);
-    callback(lista);
+
+
+    $timeout(function(){
+      callback(lista);
+    }, 1500);
+
   }
 
 

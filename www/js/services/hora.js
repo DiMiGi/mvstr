@@ -1,6 +1,6 @@
 angular.module('movistar')
 
-.factory('hora', function(geo) {
+.factory('hora', function(geo, $timeout) {
 
   function obtenerHoraAgendada(callback){
 
@@ -15,7 +15,11 @@ angular.module('movistar')
       motivo: "Falla tecnica"
     }
 
-    callback(null);
+
+    $timeout(function(){
+      callback(hora);
+    }, 2000);
+
   }
 
 
@@ -24,15 +28,19 @@ angular.module('movistar')
     var err = null;
 
     // Probando la demora
-    setTimeout(function(){ callback(err); }, 1000);
+    $timeout(function(){
+      callback(err);
+    }, 1800);
 
   }
 
 
 
   function tieneHoraAgendada(callback){
-    callback(false);
 
+    $timeout(function(){
+      callback(true);
+    }, 1500);
   }
 
   return { obtenerHoraAgendada, tieneHoraAgendada, eliminarHora };

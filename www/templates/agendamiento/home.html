@@ -3,18 +3,39 @@
 
     <div class = "list">
 
-       <div class="row">
-         <div>
-          <p>Desea agendar una hora?</p>
-          <p ng-show="tieneHoraAgendada">
-            Usted solo puede agendar una hora simultaneamente. Si desea otra hora, puede cancelar o reagendar la hora tomada.
-          </p>
-        </div>
+
+      <!-- Agenda -->
+
+
+      <!-- Aun esta cargando la agenda -->
+
+      <div class="row" ng-show="tieneHoraAgendada == 'OBTENIENDO'">
+        <p><ion-spinner></ion-spinner> Iniciando agenda....</p>
       </div>
 
-      <button ng-show="!tieneHoraAgendada" class="button button-full" ui-sref="agendamiento_tomar_agenda">Agendar hora</button>
+      <!-- Tiene hora agendada -->
 
-      <button ng-show="tieneHoraAgendada" class="button button-full" ui-sref="agendamiento_ver_hora_agendada">Ver hora agendada</button>
+      <div ng-show="tieneHoraAgendada == true">
+        <div class="row">
+          <p>Usted solo puede agendar una hora simultaneamente. Si desea otra hora, puede cancelar o reagendar la hora tomada.</p>
+        </div>
+        <button class="button button-full" ui-sref="agendamiento_ver_hora_agendada">Ver hora agendada</button>
+      </div>
+
+      <!-- No tiene hora agendada -->
+
+      <div ng-show="tieneHoraAgendada == false">
+        <div class="row">
+          <p>Desea agendar una hora?</p>
+        </div>
+        <button class="button button-full" ui-sref="agendamiento_tomar_agenda">Agendar hora</button>
+      </div>
+
+
+
+
+
+      <!-- Toma de numero -->
 
       <div class="row">
         Prefiero tomar un número

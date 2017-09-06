@@ -8,7 +8,9 @@
         Motivo de atención
       </div>
       <select>
-        <option selected="true" disabled="disabled">Seleccione su motivo</option>
+        <option selected="true" disabled="disabled">
+          {{ motivosAtencion.length > 0 ? 'Seleccione su motivo' : 'Cargando...' }}
+        </option>
         <option ng-repeat="motivo in motivosAtencion">{{ motivo.titulo }}</option>
       </select>
     </label>
@@ -63,7 +65,7 @@
 
     <!-- Busqueda manual de sucursal -->
 
-    <div ng-show="!usandoGeolocalizacion">
+    <div ng-show="!usandoGeolocalizacion && regiones != null">
 
       <!-- Escoger la región -->
       <label class="item item-input item-select">
@@ -92,6 +94,12 @@
         </ion-radio>
         <button class="button button-small" ng-click="verMapa(sucursal)"><i class="icon ion-location"></i> Ver en mapa</button>
       </div>
+    </div>
+
+    <!-- Busqueda manual de sucursal, cuando aun no ha cargado -->
+
+    <div ng-show="!usandoGeolocalizacion && regiones == null">
+      <p><ion-spinner></ion-spinner> Buscando sucursales disponibles....</p>
     </div>
 
 
