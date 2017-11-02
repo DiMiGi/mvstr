@@ -17,7 +17,7 @@ angular.module('movistar')
 
 
     $timeout(function(){
-      callback(hora);
+      callback(null);
     }, 2000);
 
   }
@@ -39,7 +39,7 @@ angular.module('movistar')
   function tieneHoraAgendada(callback){
 
     $timeout(function(){
-      callback(true);
+      callback(false);
     }, 1500);
   }
 

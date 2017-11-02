@@ -1,18 +1,17 @@
-<ion-view view-title="App base">
+<ion-view view-title="App base" ng-controller="indexCtrl">
    <ion-content>
 
      <p>Esta vista corresponde a la aplicacion base de movistar. Esta vista no se debe transferir a la aplicacion.</p>
 
      <div class = "list">
         <label class = "item item-input item-stacked-label">
-           <input type = "text" placeholder = "Usuario" />
+           <input type = "text" placeholder = "ID de usuario a utilizar" ng-model="form.clientId"/>
         </label>
 
-        <label class = "item item-input item-stacked-label">
-           <input type = "password" placeholder = "Contraseña" />
-        </label>
+        <button class = "button button-full" ng-click="login()">Ingresar</button>
 
-        <button class = "button button-full">Ingresar</button>
+        <p ng-if="currentUser == null">No esta logueado.</p>
+        <p ng-if="currentUser != null">Esta utilizando un login falso usando la ID de cliente {{ currentUser }}.</p>
      </div>
 
      <a ui-sref="agendamiento">Ir a vista de agenda y toma de numero</a>
