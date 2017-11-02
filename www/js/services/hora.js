@@ -1,47 +1,67 @@
 angular.module('movistar')
 
-.factory('hora', function(geo, $timeout) {
+.factory('hora', function(geo, $http, login) {
+
+  let urlBase = "http://localhost:3000";
 
   function obtenerHoraAgendada(callback){
-
-    var hora = {
-      id: 23,
-      fecha: new Date(),
-      sucursal: {
-        id: 3,
-        direccion: "Departamento de Ingenieria informatica, USACH #123, Estacion Central, Santiago de Chile",
-        posicion: { latitud: -33.4497562, longitud: -70.6871716 }
-      },
-      motivo: "Falla tecnica"
-    }
-
-
-    $timeout(function(){
-      callback(null);
-    }, 2000);
-
+    $http.get(`${urlBase}/api/appointments/current`).then(function(response){
+      callback(response.data);
+    });
   }
-
 
 
   function eliminarHora(callback){
-    var err = null;
+    $http.delete(`${urlBase}/api/appointments/cancel`, { client_id: login.clientId }).then(callback);
+  }
 
-    // Probando la demora
-    $timeout(function(){
-      callback(err);
-    }, 1800);
+  function agendarHora(params, callback, errorCallback){
+
+    let url = `${urlBase}/api/appointments/schedule_appointment`;
+
+    // Esta linea no deberia estar en la aplicacion real:
+    url += `?client_id=${login.clientId}`;
+
+    let p = {
+      hour: params.hora,
+      minutes: params.minutos,
+      yyyy: params.yyyy,
+      mm: params.mm,
+      dd: params.dd,
+      attention_type_id: params.motivo.id,
+      branch_office_id: params.sucursal.id
+    };
+
+
+    $http.post(url, p).then(function(response){
+      if(response.status == 200){
+        callback(response.data);
+      } else {
+        errorCallback(response.data.error);
+      }
+    });
 
   }
 
 
+  function obtenerHorasLibres(params, callback){
+    let url = `${urlBase}/api/appointments/${params.yyyy}/${params.mm}/${params.dd}/branch_office/${params.branch_office_id}/attention_type/${params.attention_type_id}`;
+
+    // Esta linea no deberia estar en la aplicacion real:
+    url += `?client_id=${login.clientId}`;
+
+    console.log(url);
+
+    $http.get(url).then(function(response){
+      callback(response.data.times);
+    });
+  }
 
   function tieneHoraAgendada(callback){
-
-    $timeout(function(){
-      callback(false);
-    }, 1500);
+    obtenerHoraAgendada(function(h){
+      callback(h.hasOwnProperty("time"));
+    });
   }
 
-  return { obtenerHoraAgendada, tieneHoraAgendada, eliminarHora };
+  return { obtenerHoraAgendada, tieneHoraAgendada, eliminarHora, obtenerHorasLibres, agendarHora };
  });

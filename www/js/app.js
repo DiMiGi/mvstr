@@ -27,7 +27,7 @@ angular.module('movistar', ['ionic', 'ngCordova', 'ionic-datepicker'])
    $stateProvider
 
    /* App base */
-   .state('index', { url: '/', templateUrl: 'home.html'})
+   .state('index', { url: '/', templateUrl: 'home.html', controller: 'IndexCtrl'})
 
    /* Vistas para la toma de numeros y agenda */
    .state('agendamiento', { url: '/agendamiento', templateUrl: 'templates/agendamiento/home.html', controller: "AgendamientoHomeController" })
@@ -36,4 +36,31 @@ angular.module('movistar', ['ionic', 'ngCordova', 'ionic-datepicker'])
    .state('agendamiento_ver_hora_agendada', { url: '/agendamiento/agenda/ver_hora', templateUrl: 'templates/agendamiento/ver_hora_agendada.html', controller: "AgendamientoVerHoraAgendadaController" });
 
    $urlRouterProvider.otherwise('/');
+});
+
+
+angular.module('movistar')
+.filter('horaFormato', function() {
+
+  function cero(n){
+    if(n < 10) return "0"+n;
+    return n;
+  }
+
+  return function(input) {
+
+    let hh = Math.floor(input/60);
+    let mm = input%60;
+
+    hh = cero(hh);
+    mm = cero(mm);
+
+    return `${hh}:${mm}`;
+  };
+})
+
+.filter('dosCeros', function() {
+  return function(input) {
+    return input < 10? "0"+input : input;
+  };
 });

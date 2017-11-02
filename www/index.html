@@ -41,6 +41,7 @@
     <script src="js/services/login.js"></script>
 
     <!-- controllers -->
+    <script src="js/controllers/home.js"></script>
     <script src="js/controllers/agendamiento/home.js"></script>
     <script src="js/controllers/agendamiento/tomar_agenda.js"></script>
     <script src="js/controllers/agendamiento/tomar_numero.js"></script>
@@ -61,25 +62,6 @@
       <ion-nav-view></ion-nav-view>
 
     </ion-pane>
-
-
-
-    <script>
-    /*
-    * Este es un controlador pequeno para la pagina de "Login falso"
-    * para ser usado por la vista en www/home.html
-    *
-    */
-    angular.module('movistar').controller('indexCtrl', function($scope, login) {
-      $scope.currentUser = null;
-      $scope.form = { clientId: "" };
-      $scope.login = function(){
-        var id = +$scope.form.clientId;
-        login.login(id);
-        $scope.currentUser = login.clientId;
-      }
-    });
-    </script>
 
   </body>
 </html>

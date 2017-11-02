@@ -21,6 +21,8 @@ angular.module('movistar')
     }
     else if(ionic.Platform.isAndroid()) {
       geoString = 'geo://?q='+pos.latitud+','+pos.longitud+'';
+    } else {
+      geoString = `https://www.google.com/maps/search/?api=1&query=${pos.latitud},${pos.longitud}`;
     }
     window.open(geoString, '_system');
   }

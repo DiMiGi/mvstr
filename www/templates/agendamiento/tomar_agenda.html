@@ -3,113 +3,169 @@
 
 
     <!-- Motivo de atencion -->
-    <label class="item item-input item-select">
-      <div class="input-label">
-        Motivo de atención
-      </div>
-      <select>
-        <option selected="true" disabled="disabled">
-          {{ motivosAtencion.length > 0 ? 'Seleccione su motivo' : 'Cargando...' }}
-        </option>
-        <option ng-repeat="motivo in motivosAtencion">{{ motivo.titulo }}</option>
-      </select>
-    </label>
+    <div ng-if="paso == 1">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Motivo de atención
+        </div>
+        <select ng-model="motivoAtencionSeleccionado.motivo">
+          <option selected="true" disabled="disabled">
+            {{ motivosAtencion.length > 0 ? 'Seleccione su motivo' : 'Cargando...' }}
+          </option>
+          <option ng-repeat="motivo in motivosAtencion" ng-value="motivo.id">{{ motivo.name }}</option>
+        </select>
+      </label>
+
+      <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button>
+    </div>
 
 
     <!-- Calendario -->
-    <div class="row">
-      <div class="col text-center">
-        <button class="button button-block" ng-click="openDatePicker()">
-          <i class="icon ion-calendar"></i>
-          <span ng-show="fechaSeleccionada == null">Seleccione día</span>
-          <span ng-show="fechaSeleccionada != null">{{ fechaSeleccionada | date:'dd MMMM yyyy' }}</span>
-        </button>
+    <div ng-if="paso == 2">
+      <div class="row">
+        <div class="col text-center">
+          <button class="button button-block" ng-click="openDatePicker()">
+            <i class="icon ion-calendar"></i>
+            <span ng-show="fechaSeleccionada == null">Seleccione día</span>
+            <span ng-show="fechaSeleccionada != null">{{ fechaSeleccionada | date:'dd MMMM yyyy' }}</span>
+          </button>
+        </div>
       </div>
+      <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button>
     </div>
 
-
-    <!-- Metodos de busqueda (cambiar entre geolocalizacion o manual) -->
-    <div class="row">
-      <button ng-show="usandoGeolocalizacion" ng-click="usarManual()" class="button button-positive"><i class="icon ion-search"></i> Buscar sucursal manualmente</button>
-      <button ng-show="!usandoGeolocalizacion" ng-click="usarGeo(false)"class="button button-positive"><i class="icon ion-location"></i> Buscar sucursales cercanas</button>
-    </div>
-
-    <!-- Escoger sucursal por geolocalizacion -->
-    <div class="row" ng-show="usandoGeolocalizacion">
-
-        <div class="list" style="width: 100%;">
-
-          <div class="item" ng-show="geoEstado == 'OBTENIENDO'">
-            <p><ion-spinner></ion-spinner> Encontrando sucursales cercanas....</p>
-          </div>
-
-          <div class="item" ng-show="geoEstado == 'FALLO'">
-            <p>No se pudo obtener sucursales cercanas <button class="button button-small" ng-click="obtenerSucursalesSugeridas()"><i class="icon ion-refresh"></i></button></p>
-          </div>
-
-          <div class="item" ng-show="geoEstado == 'NO_HAY_SUCURSALES_CERCANAS'">
-            <p>No hay sucursales cercanas a su ubicación.</p>
-          </div>
-
-          <div ng-show="geoEstado == 'EXITO'" class="item item-text-wrap sucursal-item" ng-repeat="sucursal in sucursalesCercanas">
-            <ion-radio class="sucursal-radio" ng-model="sucursalElegida.sucursal" ng-value="sucursal">
-              <p>{{ sucursal.direccion }}</p>
-              <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
-            </ion-radio>
-            <button class="button button-small" ng-click="verMapa(sucursal)"><i class="icon ion-location"></i> Ver en mapa</button>
-          </div>
-        </div>
-    </div>
+    <div ng-if="paso == 3">
 
 
-
-    <!-- Busqueda manual de sucursal -->
-
-    <div ng-show="!usandoGeolocalizacion && regiones != null">
-
-      <!-- Escoger la región -->
-      <label class="item item-input item-select">
-        <div class="input-label">
-          Región
-        </div>
-
-        <!-- ng-change="..." es para que cuando cambie de region, se desmarque la sucursal que estaba elegida -->
-        <select ng-model="regionSeleccionada" ng-options="region as region.region for region in regiones" ng-change="sucursalElegida.sucursal = null"></select>
-      </label>
-
-      <!-- Escoger la comuna -->
-      <label class="item item-input item-select">
-        <div class="input-label">
-          Comuna
-        </div>
-        <!-- ng-change="..." es para que cuando cambie de comuna, se desmarque la sucursal que estaba elegida -->
-        <select ng-model="comunaSeleccionada" ng-options="comuna.comuna for comuna in regionSeleccionada.comunas" ng-change="sucursalElegida.sucursal = null"></select>
-      </label>
-
-      <!-- Escoger la sucursal -->
-      <div class="item item-text-wrap sucursal-item" ng-repeat="sucursal in comunaSeleccionada.sucursales">
-        <ion-radio class="sucursal-radio" ng-model="sucursalElegida.sucursal" ng-value="sucursal">
-          <p>{{ sucursal.direccion }}</p>
-          <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
-        </ion-radio>
-        <button class="button button-small" ng-click="verMapa(sucursal)"><i class="icon ion-location"></i> Ver en mapa</button>
+      <!-- Metodos de busqueda (cambiar entre geolocalizacion o manual) -->
+      <div class="row">
+        <button ng-show="usandoGeolocalizacion" ng-click="usarManual()" class="button button-positive"><i class="icon ion-search"></i> Buscar sucursal manualmente</button>
+        <button ng-show="!usandoGeolocalizacion" ng-click="usarGeo(false)"class="button button-positive"><i class="icon ion-location"></i> Buscar sucursales cercanas</button>
       </div>
+
+      <!-- Escoger sucursal por geolocalizacion -->
+      <div class="row" ng-show="usandoGeolocalizacion">
+
+          <div class="list" style="width: 100%;">
+
+            <div class="item" ng-show="geoEstado == 'OBTENIENDO'">
+              <p><ion-spinner></ion-spinner> Encontrando sucursales cercanas....</p>
+            </div>
+
+            <div class="item" ng-show="geoEstado == 'FALLO'">
+              <p>No se pudo obtener sucursales cercanas <button class="button button-small" ng-click="obtenerSucursalesSugeridas()"><i class="icon ion-refresh"></i></button></p>
+            </div>
+
+            <div class="item" ng-show="geoEstado == 'NO_HAY_SUCURSALES_CERCANAS'">
+              <p>No hay sucursales cercanas a su ubicación.</p>
+            </div>
+
+            <div ng-show="geoEstado == 'EXITO'" class="item item-text-wrap sucursal-item" ng-repeat="sucursal in sucursalesCercanas">
+              <ion-radio class="sucursal-radio" ng-model="sucursalElegida.sucursal" ng-value="sucursal">
+                <p>{{ sucursal.full_address }}</p>
+                <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
+              </ion-radio>
+              <button class="button button-small" ng-click="verMapa(sucursal)"><i class="icon ion-location"></i> Ver en mapa</button>
+            </div>
+          </div>
+      </div>
+
+
+
+      <!-- Busqueda manual de sucursal -->
+
+      <div ng-show="!usandoGeolocalizacion && regiones != null">
+
+        <!-- Escoger la región -->
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Región
+          </div>
+
+          <!-- ng-change="..." es para que cuando cambie de region, se desmarque la sucursal que estaba elegida -->
+          <select ng-model="regionSeleccionada" ng-options="region as region.region for region in regiones" ng-change="sucursalElegida.sucursal = null"></select>
+        </label>
+
+        <!-- Escoger la comuna -->
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Comuna
+          </div>
+          <!-- ng-change="..." es para que cuando cambie de comuna, se desmarque la sucursal que estaba elegida -->
+          <select ng-model="comunaSeleccionada" ng-options="comuna.comuna for comuna in regionSeleccionada.comunas" ng-change="sucursalElegida.sucursal = null"></select>
+        </label>
+
+        <!-- Escoger la sucursal -->
+        <div class="item item-text-wrap sucursal-item" ng-repeat="sucursal in comunaSeleccionada.sucursales">
+          <ion-radio class="sucursal-radio" ng-model="sucursalElegida.sucursal" ng-value="sucursal">
+            <p>{{ sucursal.address }}</p>
+            <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
+          </ion-radio>
+          <button class="button button-small" ng-click="verMapa(sucursal)"><i class="icon ion-location"></i> Ver en mapa</button>
+        </div>
+      </div>
+
+      <!-- Busqueda manual de sucursal, cuando aun no ha cargado -->
+
+      <div ng-show="!usandoGeolocalizacion && regiones == null">
+        <p><ion-spinner></ion-spinner> Buscando sucursales disponibles....</p>
+      </div>
+
+      <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button>
+
     </div>
 
-    <!-- Busqueda manual de sucursal, cuando aun no ha cargado -->
+    <!-- Calendario -->
+    <div ng-if="paso == 4">
 
-    <div ng-show="!usandoGeolocalizacion && regiones == null">
-      <p><ion-spinner></ion-spinner> Buscando sucursales disponibles....</p>
+      <p ng-if="tiemposLibres == null"><ion-spinner></ion-spinner> Por favor espere....</p>
+      <p ng-if="tiemposLibres != null && tiemposLibres.length == 0">No hay tiempos libres para agendar. Pruebe otro dia.</p>
+
+      <p ng-if="tiemposLibres != null && tiemposLibres.length > 0">
+
+        <div ng-repeat="t in tiemposLibres">
+          <a href="javascript:;" ng-click="seleccionarHora(t)">{{ t | horaFormato }}</a>
+        </div>
+      </p>
     </div>
 
 
-<!--
-    <h3>Debug:</h3>
-    <p>La sucursal elegida, es la ID: {{ sucursalElegida.sucursal.id }}</p>
-    <p>Se tomara como decision final el que es
-    <b ng-show="usandoGeolocalizacion">geolocalizacion</b>
-    <b ng-show="!usandoGeolocalizacion">manual</b>, por lo tanto hay que validar que ese no sea NULL</p>
--->
+    <div ng-if="paso == 5">
+
+      <p>¿Están todos los datos correctos?</p>
+
+
+      <div class="row">
+          <div class="col col-20" style="text-align: right"><i class="icon ion-clock"></i></div>
+          <div class="col">{{ todosDatos.horaSeleccionada | horaFormato }}</div>
+      </div>
+
+      <div class="row">
+          <div class="col col-20" style="text-align: right"><i class="icon ion-calendar"></i></div>
+          <div class="col">{{ todosDatos.yyyy }}/{{ todosDatos.mm | dosCeros }}/{{ todosDatos.dd | dosCeros }}</div>
+      </div>
+
+      <div class="row">
+          <div class="col col-20" style="text-align: right"><i class="icon ion-chatbox"></i></div>
+          <div class="col">{{ todosDatos.motivo.name }}</div>
+      </div>
+
+      <div class="row">
+          <div class="col col-20" style="text-align: right">Sucursal</div>
+          <div class="col">{{ todosDatos.sucursal.full_address }}</div>
+      </div>
+
+
+      <button class="button button-block button-positive" ng-click="agendar()" ng-if="!agendando">Agendar</button>
+      <button class="button button-block button-positive" ng-click="agendar()" ng-if="agendando" disabled>Espere...</button>
+
+
+
+
+
+
+    </div>
+
 
   </ion-content>
 </ion-view>
