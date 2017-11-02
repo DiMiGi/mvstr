@@ -6,7 +6,10 @@ angular.module('movistar')
 
 
   $scope.verMapa = function(){
-    geo.abrirMapa($scope.horaAgendada.sucursal.posicion);
+    geo.abrirMapa({
+      latitud: $scope.horaAgendada.executive.branch_office.latitude,
+      longitud: $scope.horaAgendada.executive.branch_office.longitude
+    });
   }
 
   $scope.eliminarMiHora = function(){

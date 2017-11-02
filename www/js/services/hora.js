@@ -5,14 +5,14 @@ angular.module('movistar')
   let urlBase = "http://localhost:3000";
 
   function obtenerHoraAgendada(callback){
-    $http.get(`${urlBase}/api/appointments/current`).then(function(response){
+    $http.get(`${urlBase}/api/appointments/current?client_id=${login.clientId}`).then(function(response){
       callback(response.data);
     });
   }
 
 
   function eliminarHora(callback){
-    $http.delete(`${urlBase}/api/appointments/cancel`, { client_id: login.clientId }).then(callback);
+    $http.delete(`${urlBase}/api/appointments/cancel?client_id=${login.clientId}`).then(callback);
   }
 
   function agendarHora(params, callback, errorCallback){

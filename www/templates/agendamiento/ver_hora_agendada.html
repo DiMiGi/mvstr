@@ -8,17 +8,17 @@
     <div ng-show="horaAgendada != null">
       <div class="row">
           <div class="col col-20" style="text-align: right"><i class="icon ion-clock"></i></div>
-          <div class="col">{{ horaAgendada.fecha | date:'HH:mm' }}</div>
+          <div class="col">{{ horaAgendada.time | date:'HH:mm' }}</div>
       </div>
 
       <div class="row">
           <div class="col col-20" style="text-align: right"><i class="icon ion-calendar"></i></div>
-          <div class="col">{{ horaAgendada.fecha | date:'dd MMMM yyyy' }}</div>
+          <div class="col">{{ horaAgendada.time | date:'dd MMMM yyyy' }}</div>
       </div>
 
       <div class="row">
           <div class="col col-20" style="text-align: right">Sucursal</div>
-          <div class="col">{{ horaAgendada.sucursal.direccion }}</div>
+          <div class="col">{{ horaAgendada.executive.branch_office.address }}</div>
       </div>
 
       <div class="row">

@@ -10,6 +10,8 @@ angular.module('movistar')
   */
   o.abrirMapa = function(pos){
 
+    console.log(pos);
+
     if(!pos.hasOwnProperty("longitud") || !pos.hasOwnProperty("latitud")){
       throw new Error("Para abrir un mapa, la posición debe contener 'longitud' y 'latitud'.");
     }
