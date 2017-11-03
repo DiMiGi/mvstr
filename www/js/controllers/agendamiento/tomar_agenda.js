@@ -8,6 +8,24 @@ angular.module('movistar')
     motivo: null
   };
 
+
+  $scope.horasPosibles = [
+    {
+      hh: 8,
+      mm: [0, 15, 45]
+    },
+    {
+      hh: 10,
+      mm: [15, 30]
+    }
+  ];
+
+  $scope.tiempoElegido = {
+    horaElegida: {},
+    minutoElegido: null
+  };
+
+
   $scope.paso = 1;
 
   // En esta variable se cargan las regiones, con sus comunas y sucursales,
@@ -48,6 +66,10 @@ angular.module('movistar')
         $scope.tiemposLibres = res;
       });
     }
+
+    if($scope.paso == 5){
+      $scope.todosDatos = obtenerTodoFormulario();
+    }
   }
 
   $scope.agendando = false;
@@ -69,11 +91,7 @@ angular.module('movistar')
 
   }
 
-  $scope.seleccionarHora = function(hora){
-    $scope.horaSeleccionada = hora;
-    $scope.todosDatos = obtenerTodoFormulario();
-    $scope.siguiente();
-  }
+
 
   function obtenerTodoFormulario(){
 
@@ -89,9 +107,8 @@ angular.module('movistar')
       sucursal: $scope.sucursalElegida.sucursal,
       motivo: motivo,
       yyyy, mm, dd,
-      hora: Math.floor($scope.horaSeleccionada/60),
-      minutos: $scope.horaSeleccionada%60,
-      horaSeleccionada: $scope.horaSeleccionada
+      hora: $scope.tiempoElegido.horaElegida.hh,
+      minutos: $scope.tiempoElegido.minutoElegido
     };
   }
 

@@ -121,12 +121,14 @@
       <p ng-if="tiemposLibres == null"><ion-spinner></ion-spinner> Por favor espere....</p>
       <p ng-if="tiemposLibres != null && tiemposLibres.length == 0">No hay tiempos libres para agendar. Pruebe otro dia.</p>
 
-      <p ng-if="tiemposLibres != null && tiemposLibres.length > 0">
+      <div ng-if="tiemposLibres != null && tiemposLibres.length > 0">
 
-        <div ng-repeat="t in tiemposLibres">
-          <a href="javascript:;" ng-click="seleccionarHora(t)">{{ t | horaFormato }}</a>
-        </div>
-      </p>
+        <select ng-model="tiempoElegido.horaElegida" ng-options="hh as hh.hh for hh in horasPosibles"></select>
+        <select ng-model="tiempoElegido.minutoElegido" ng-options="mm for mm in tiempoElegido.horaElegida.mm"></select>
+
+        <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button>
+
+      </div>
     </div>
 
 
@@ -137,7 +139,7 @@
 
       <div class="row">
           <div class="col col-20" style="text-align: right"><i class="icon ion-clock"></i></div>
-          <div class="col">{{ todosDatos.horaSeleccionada | horaFormato }}</div>
+          <div class="col">{{ todosDatos.hora | dosCeros }}:{{ todosDatos.minutos | dosCeros }}</div>
       </div>
 
       <div class="row">
