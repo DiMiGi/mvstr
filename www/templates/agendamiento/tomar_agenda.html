@@ -123,8 +123,20 @@
 
       <div ng-if="tiemposLibres != null && tiemposLibres.length > 0">
 
-        <select ng-model="tiempoElegido.horaElegida" ng-options="hh as hh.hh for hh in horasPosibles"></select>
-        <select ng-model="tiempoElegido.minutoElegido" ng-options="mm for mm in tiempoElegido.horaElegida.mm"></select>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Hora
+          </div>
+          <select ng-model="tiempoElegido.horaElegida" ng-options="hh as hh.hh for hh in horasPosibles"></select>
+        </label>
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Minuto
+          </div>
+          <select ng-model="tiempoElegido.minutoElegido" ng-options="mm for mm in tiempoElegido.horaElegida.mm"></select>
+        </label>
+
 
         <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button>
 
