@@ -1,3 +1,49 @@
+
+/* === DESCARGA DE FUENTE DE TELEFONICA === */
+@font-face {
+  font-family: "Telefonica_bold";
+  src: url("base/fonts/TelefonicaWeb-Bold.eot");
+  src: url("base/fonts/TelefonicaWeb-Bold.eot?#iefix") format("embedded-opentype"), url("base/fonts/TelefonicaWeb-Bold.woff") format("woff"), url("base/fonts/TelefonicaWeb-Bold.ttf") format("truetype"), url("base/fonts/TelefonicaWeb-Bold.svg#movistar_textregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Telefonica_xlight";
+  src: url("base/fonts/TelefonicaWeb-ExtraLight.eot");
+  src: url("base/fonts/TelefonicaWeb-ExtraLight.eot?#iefix") format("embedded-opentype"), url("base/fonts/TelefonicaWeb-ExtraLight.woff") format("woff"), url("base/fonts/TelefonicaWeb-ExtraLight.ttf") format("truetype"), url("base/fonts/TelefonicaWeb-ExtraLight.svg#movistar_textregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Telefonica_hand";
+  src: url("base/fonts/TelefonicaWeb-Hand.eot");
+  src: url("base/fonts/TelefonicaWeb-Hand.eot?#iefix") format("embedded-opentype"), url("base/fonts/TelefonicaWeb-Hand.woff") format("woff"), url("base/fonts/TelefonicaWeb-Hand.ttf") format("truetype"), url("base/fonts/TelefonicaWeb-Hand.svg#movistar_textregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Telefonica_light";
+  src: url("base/fonts/TelefonicaWeb-Light.eot");
+  src: url("base/fonts/TelefonicaWeb-Light.eot?#iefix") format("embedded-opentype"), url("base/fonts/TelefonicaWeb-Light.woff") format("woff"), url("base/fonts/TelefonicaWeb-Light.ttf") format("truetype"), url("base/fonts/TelefonicaWeb-Light.svg#movistar_textregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Telefonica";
+  src: url("base/fonts/TelefonicaWeb-Regular.eot");
+  src: url("base/fonts/TelefonicaWeb-Regular.eot?#iefix") format("embedded-opentype"), url("base/fonts/TelefonicaWeb-Regular.woff") format("woff"), url("base/fonts/TelefonicaWeb-Regular.ttf") format("truetype"), url("base/fonts/TelefonicaWeb-Regular.svg#movistar_textregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Telefonica_italic";
+  src: url("base/fonts/TelefonicaWeb-RegularItalic.eot");
+  src: url("base/fonts/TelefonicaWeb-RegularItalic.eot?#iefix") format("embedded-opentype"), url("base/fonts/TelefonicaWeb-RegularItalic.woff") format("woff"), url("base/fonts/TelefonicaWeb-RegularItalic.ttf") format("truetype"), url("base/fonts/TelefonicaWeb-RegularItalic.svg#movistar_textregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+/* === CLASES === */
+
 .sucursal-item {
   padding: 5px 5px;
 }
@@ -5,3 +51,96 @@
 .sucursal-radio {
   border: 0px;
 }
+
+.regular{
+  font-family: "Telefonica",Arial,sans-serif;
+}
+
+.bold{
+  font-family: "Telefonica_bold",Arial,sans-serif;
+}
+
+.hand{
+  font-family: "Telefonica_hand",Arial,sans-serif;
+}
+
+.italic{
+  font-family: "Telefonica_italic", Arial, sans-serif;
+}
+
+.fontsize-h2-low{
+  font-size: 40px;
+}
+
+
+.color-celeste-claro{ color: #66cbec; }
+.color-celeste{ color: #33bae6; }
+.color-celeste-oscuro{ color: #00A9E0; }
+
+.color-verde-claro{ color: #9ddc66; }
+.color-verde{ color: #7cd133; }
+.color-verde-oscuro{ color: #5BC500; }
+
+.color-gris-claro{ color: #D3D4D3; }
+.color-gris{ color: #B6B7B7; }
+.color-gris-oscuro{ color: #86888C; }
+
+.color-morado-claro{ color: #caa5cb; }
+.color-morado-oscuro{ color: #954B97; }
+
+.color-rosado-claro{ color: #f4a1b6; }
+.color-rosado-oscuro{ color: #E9426D; }
+
+.color-naranjo-claro{ color: #f6b49c; }
+.color-naranjo-oscuro{ color: #EC6839; }
+
+.color-amarillo-claro{ color: #face80; }
+.color-amarillo-oscuro{ color: #F59C00; }
+
+.bg-color-celeste{ background-color: #00A9E0}
+.bg-color-verde{ background-color: #5BC500}
+.bg-color-gris{ background-color: #86888C}
+
+
+
+/* === ELEMENTOS ===*/
+
+h1 {
+  font-family: "Telefonica_xlight";
+  font-size: 50px;
+}
+
+h2 {
+  font-family: "Telefonica";
+  font-size: 44px;
+}
+
+h3 {
+  font-family: "Telefonica";>
+  font-size: 24px;
+}
+
+a {
+  font-family: "Telefonica_bold",Arial,sans-serif;
+}
+
+.button {
+  font-family: "Telefonica";
+  background-color: #00A9E0;
+  color: #FFFFFF;
+  margin: 5px;
+  font-size: 13px;
+  height: 45px;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+}
+
+.button:hover {
+  color: #FFFFFF;
+  text-decoration: none; }
+
+.button.active, .button.activated {
+  border-color: #B6B7B7;
+  background-color: #D3D4D3; }

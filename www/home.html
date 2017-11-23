@@ -11,7 +11,7 @@
            <input type = "text" placeholder = "ID de usuario a utilizar" ng-model="form.clientId"/>
         </label>
 
-        <button class = "button button-full" ng-click="login()">Ingresar</button>
+        <button class = "button bg-color-verde" ng-click="login()">Ingresar</button>
 
         <p ng-if="currentUser == null">No esta logueado.</p>
         <p ng-if="currentUser != null">Esta utilizando un login falso usando la ID de cliente {{ currentUser }}.</p>
