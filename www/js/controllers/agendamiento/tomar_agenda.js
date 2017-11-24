@@ -45,7 +45,10 @@ angular.module('movistar')
   $scope.todosDatos = {};
 
   $scope.siguiente = function(){
-    $scope.paso++;
+
+    if(datosValidos($scope.paso)){
+      $scope.paso++;
+    }
 
     if($scope.paso == 4){
 
@@ -91,6 +94,46 @@ angular.module('movistar')
 
   }
 
+  function popUpAlert(mensaje){
+    $ionicPopup.alert({
+      title: mensaje
+    });
+  }
+
+  function datosValidos(paso){
+    switch (paso) {
+      /* SELECCION DE MOTIVO DE ATENCIÓN */
+      case 1:
+        if($scope.motivoAtencionSeleccionado.motivo === null){
+          popUpAlert("Seleccione el motivo de atención");
+          return false;
+        }
+        return true;
+        break;
+      /* SELECCION DEL DIA DE ATENCIÓN */
+      case 2:
+        if($scope.fechaSeleccionada === null){
+          popUpAlert("Seleccione el dia de atención");
+          return false;
+        }
+        return true;
+        break;
+      /* SELECCION DE REGION, COMUNA Y SUCURSAL */
+      case 3:
+        if($scope.sucursalElegida.sucursal === null){
+          popUpAlert("Asegurese de seleccionar región, comuna y sucursal a la que desea agendar una hora");
+          return false;
+        }
+        return true;
+        break;
+      /* SELECCION DE HORA DE AGENDA */
+      case 4:
+
+        break;
+      default:
+        return false;
+    }
+  }
 
 
   function obtenerTodoFormulario(){
