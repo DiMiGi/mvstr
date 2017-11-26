@@ -9,7 +9,7 @@
           Motivo de atención
         </div>
         <select ng-model="motivoAtencionSeleccionado.motivo">
-          <option selected="true" disabled="disabled">
+          <option selected="true" disabled="disabled" value="">
             {{ motivosAtencion.length > 0 ? 'Seleccione su motivo' : 'Cargando...' }}
           </option>
           <option ng-repeat="motivo in motivosAtencion" ng-value="motivo.id">{{ motivo.name }}</option>
@@ -17,22 +17,22 @@
       </label>
 
       <!-- <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button> -->
-      <button class="button bg-color-green" ng-click="siguiente()">Siguiente</button>
+      <button class="button" ng-click="siguiente()">Siguiente</button>
     </div>
 
 
     <!-- Calendario -->
     <div ng-if="paso == 2">
-      <div class="row">
+      <label class="item">
         <div class="col text-center">
           <!-- <button class="button button-block" ng-click="openDatePicker()"> -->
-            <button class="button" ng-click="openDatePicker()">
+          <button class="button" ng-click="openDatePicker()">
             <i class="icon ion-calendar"></i>
             <span ng-show="fechaSeleccionada == null">Seleccione día</span>
             <span ng-show="fechaSeleccionada != null">{{ fechaSeleccionada | date:'dd MMMM yyyy' }}</span>
           </button>
         </div>
-      </div>
+      </label>
       <!-- <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button> -->
       <button class="button" ng-click="siguiente()">Siguiente</button>
     </div>
@@ -144,7 +144,7 @@
         </label>
 
 
-        <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button>
+        <button class="button" ng-click="siguiente()">Siguiente</button>
 
       </div>
     </div>
@@ -172,12 +172,14 @@
 
       <div class="row">
           <div class="col col-20" style="text-align: right">Sucursal</div>
-          <div class="col">{{ todosDatos.sucursal.full_address }}</div>
+          <!-- HAY QUE COLOCAR LA FUNCION DE FULL ADDRESS, YA QUE todosDatos.sucursal SOLO OBTIENE
+              ADDRESS E ID -->
+          <div class="col">{{ todosDatos.sucursal.address }}</div>
       </div>
 
 
-      <button class="button button-block button-positive" ng-click="agendar()" ng-if="!agendando">Agendar</button>
-      <button class="button button-block button-positive" ng-click="agendar()" ng-if="agendando" disabled>Espere...</button>
+      <button class="button" ng-click="agendar()" ng-if="!agendando">Agendar</button>
+      <button class="button" ng-click="agendar()" ng-if="agendando" disabled>Espere...</button>
 
 
 

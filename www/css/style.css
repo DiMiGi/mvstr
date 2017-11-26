@@ -73,34 +73,62 @@
 }
 
 
-.color-celeste-claro{ color: #66cbec; }
-.color-celeste{ color: #33bae6; }
-.color-celeste-oscuro{ color: #00A9E0; }
+.color-celeste-claro{ color: #66cbec !important; }
+.color-celeste{ color: #33bae6 !important; }
+.color-celeste-oscuro{ color: #00A9E0 !important; }
 
-.color-verde-claro{ color: #9ddc66; }
-.color-verde{ color: #7cd133; }
-.color-verde-oscuro{ color: #5BC500; }
+.color-verde-claro{ color: #9ddc66 !important; }
+.color-verde{ color: #7cd133 !important; }
+.color-verde-oscuro{ color: #5BC500 !important; }
 
-.color-gris-claro{ color: #D3D4D3; }
-.color-gris{ color: #B6B7B7; }
-.color-gris-oscuro{ color: #86888C; }
+.color-gris-claro{ color: #D3D4D3 !important; }
+.color-gris{ color: #B6B7B7 !important; }
+.color-gris-oscuro{ color: #86888C !important; }
 
-.color-morado-claro{ color: #caa5cb; }
-.color-morado-oscuro{ color: #954B97; }
+.color-morado-claro{ color: #caa5cb !important; }
+.color-morado-oscuro{ color: #954B97 !important; }
 
-.color-rosado-claro{ color: #f4a1b6; }
-.color-rosado-oscuro{ color: #E9426D; }
+.color-rosado-claro{ color: #f4a1b6 !important; }
+.color-rosado-oscuro{ color: #E9426D !important; }
 
-.color-naranjo-claro{ color: #f6b49c; }
-.color-naranjo-oscuro{ color: #EC6839; }
+.color-naranjo-claro{ color: #f6b49c !important; }
+.color-naranjo-oscuro{ color: #EC6839 !important; }
 
-.color-amarillo-claro{ color: #face80; }
-.color-amarillo-oscuro{ color: #F59C00; }
+.color-amarillo-claro{ color: #face80 !important; }
+.color-amarillo-oscuro{ color: #F59C00 !important; }
 
-.bg-color-celeste{ background-color: #00A9E0}
-.bg-color-verde{ background-color: #5BC500}
-.bg-color-gris{ background-color: #86888C}
+.bg-color-celeste{ background-color: #00A9E0 !important;}
+.bg-color-verde{ background-color: #5BC500 !important;}
+.bg-color-gris{ background-color: #86888C !important;}
 
+.ionic_datepicker_modal .selected_date,
+.ionic_datepicker_modal .footer,
+.ionic_datepicker_modal .header,
+.ionic_datepicker_modal .button-clear{
+  background-color: #00A9E0 !important;
+}
+
+.item-radio input:checked + .radio-content .item-content{
+  background: #9ddc66 !important;
+}
+
+.ionic_datepicker_modal .button-clear{
+  color: #FFFFFF !important;
+}
+
+.ionic_datepicker_modal .today{
+  border: 1px solid #00A9E0 !important;
+}
+
+.ionic_datepicker_modal .month_select, .ionic_datepicker_modal .year_select{
+  border-bottom: 1px solid #00A9E0 !important;
+}
+
+.ionic_datepicker_modal .month_select:after,
+.ionic_datepicker_modal .year_select:after,
+.item-radio input:checked + .radio-content .radio-icon{
+  color: #00A9E0 !important;
+}
 
 
 /* === ELEMENTOS ===*/

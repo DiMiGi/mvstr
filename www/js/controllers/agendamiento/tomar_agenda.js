@@ -128,7 +128,11 @@ angular.module('movistar')
         break;
       /* SELECCION DE HORA DE AGENDA */
       case 4:
-
+        if($scope.tiempoElegido.horaElegida === null || $scope.tiempoElegido.minutoElegido === null){
+          popUpAlert("Asegurese de seleccionar minuto y hora en la que desea agendar la cita");
+          return false;
+        }
+        return true;
         break;
       default:
         return false;
