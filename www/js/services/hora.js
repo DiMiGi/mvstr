@@ -15,6 +15,10 @@ angular.module('movistar')
     $http.delete(`${urlBase}/api/appointments/cancel?client_id=${login.clientId}`).then(callback);
   }
 
+  function confirmarHora(callback){
+    $http.post(`${urlBase}/api/appointments/confirm_appointment?client_id=${login.clientId}`).then(callback);
+  }
+
   function agendarHora(params, callback, errorCallback){
 
     let url = `${urlBase}/api/appointments/schedule_appointment`;

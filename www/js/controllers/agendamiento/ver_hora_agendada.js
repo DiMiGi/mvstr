@@ -1,8 +1,22 @@
 angular.module('movistar')
 
-.controller('AgendamientoVerHoraAgendadaController', function($scope, hora, geo, $state, $ionicPopup, $cordovaLocalNotification) {
+.controller('AgendamientoVerHoraAgendadaController', function($scope, hora, geo, $timeout, $state, $ionicPopup, $cordovaLocalNotification) {
 
   console.log("Controlador ver hora agendada");
+
+
+  $scope.confirmable = false;
+  $scope.polling = null;
+
+  $scope.confirmada = false;
+
+  // Si la diferencia con el tiempo actual y con la hora agendada es menor a este valor,
+  // aparecera un boton para confirmar la hora, y ademas se hara con geolocalizacion.
+  $scope.minutosAntesDeConfirmar = 20;
+
+  // Este es el tiempo (en minutos) que hay entre cada intento de verificar si la
+  // posicion del usuario esta lo suficientemente cerca de la sucursal
+  $scope.minutosPolling = 3;
 
 
   $scope.verMapa = function(){
@@ -41,6 +55,27 @@ angular.module('movistar')
   }
 
 
+  // Esta funcion inicia un polling cada ciertos minutos para ver si
+  // la persona se encuentra cerca de la sucursal
+  function geoPolling(){
+
+    $scope.polling = $timeout(function(){
+
+      geo.obtenerPosicion({ timeout: 10000 }, function(pos){
+
+        // Se obtuvo la posicion, ahora hay que ver si esta cercana
+        // a la sucursal
+        console.log("La posicion obtenida por GPS es:")
+        console.log(pos.latitud)
+        console.log(pos.longitud)
+        console.log("Y la posicion de la sucursal es: ")
+        console.log($scope.horaAgendada.executive.branch_office.latitude)
+        console.log($scope.horaAgendada.executive.branch_office.longitude)
+      });
+
+    }, $scope.minutosPolling * 60 * 1000);
+  }
+
 
   $scope.$on('$ionicView.beforeEnter', function(){
 
@@ -57,6 +92,17 @@ angular.module('movistar')
       if(!hora){
         // Error, deberia volver al inicio de la aplicacion.
         $state.go("agendamiento");
+      }
+
+      let ahora = (new Date()).getTime();
+      let cita = (new Date(hora.time)).getTime();
+      let diferenciaMinutos = ((cita - ahora)/1000)/60;
+
+      // Si "diferenciaMinutos" es menor al valor indicado, hacer que
+      // la cita sea confirmable.
+      if(diferenciaMinutos < $scope.minutosAntesDeConfirmar){
+        $scope.confirmable = true;
+        geoPolling();
       }
 
       $scope.horaAgendada = hora;
