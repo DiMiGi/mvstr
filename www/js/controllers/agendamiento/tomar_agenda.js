@@ -84,17 +84,6 @@ angular.module('movistar')
 
       $scope.agendando = false;
 
-      /*
-      * Formato:
-      {
-        id: 345,
-        title: 'Title here',
-        text: 'Text here',
-        data: {
-          customProperty: 'custom value'
-        },
-        at: new Date()
-      }*/
       console.log("Cuando se agenda, esto viene del Backend:");
       console.log(data);
 

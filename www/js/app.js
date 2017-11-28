@@ -5,7 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('movistar', ['ionic', 'ngCordova', 'ionic-datepicker'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $state) {
+
+
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -17,6 +19,14 @@ angular.module('movistar', ['ionic', 'ngCordova', 'ionic-datepicker'])
       // a much nicer keyboard experience.
       cordova.plugins.Keyboard.disableScroll(true);
     }
+
+    // Esto es para que cuando se reciba una notificacion y se haga clic en ella,
+    // se redireccione a la vista para ver la hora agendada.
+    cordova.plugins.notification.local.on("click", function (id, state, json) {
+      $state.go("agendamiento_ver_hora_agendada");
+    });
+
+
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
