@@ -22,9 +22,14 @@ angular.module('movistar', ['ionic', 'ngCordova', 'ionic-datepicker'])
 
     // Esto es para que cuando se reciba una notificacion y se haga clic en ella,
     // se redireccione a la vista para ver la hora agendada.
-    cordova.plugins.notification.local.on("click", function (id, state, json) {
-      $state.go("agendamiento_ver_hora_agendada");
-    });
+    try {
+      // Lo pongo dentro de un try & catch porque en modo PC no funciona.
+      cordova.plugins.notification.local.on("click", function (id, state, json) {
+        $state.go("agendamiento_ver_hora_agendada");
+      });
+    } catch(e){
+
+    }
 
 
     if(window.StatusBar) {
