@@ -1,6 +1,6 @@
 angular.module('movistar')
 
-.controller('AgendamientoHomeController', function($scope, hora) {
+.controller('AgendamientoHomeController', function($scope, hora, $timeout, $ionicPopup) {
 
   $scope.$on('$ionicView.beforeEnter', function(){
 

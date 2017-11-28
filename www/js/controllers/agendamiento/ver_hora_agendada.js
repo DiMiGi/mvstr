@@ -1,6 +1,6 @@
 angular.module('movistar')
 
-.controller('AgendamientoVerHoraAgendadaController', function($scope, hora, geo, $state, $ionicPopup) {
+.controller('AgendamientoVerHoraAgendadaController', function($scope, hora, geo, $state, $ionicPopup, $cordovaLocalNotification) {
 
   console.log("Controlador ver hora agendada");
 
@@ -23,6 +23,15 @@ angular.module('movistar')
 
     confirm.then(function(res) {
       if(res){
+        // Eliminar todas las notificaciones que habian sido planificadas
+        // para recordarle al usuario.
+        try {
+          $cordovaLocalNotification.cancellAll().then(function(){ });
+        } catch(e){
+          console.log("No se pudo eliminar notificaciones. En PC no funciona.");
+          console.log(e);
+        }
+
         $scope.estado = 'ELIMINANDO';
         hora.eliminarHora(function(){
           $state.go("agendamiento");

@@ -1,6 +1,7 @@
 angular.module('movistar')
 
-.controller('AgendamientoTomarAgendaController', function($ionicPopup, $location, $scope, $rootScope, $ionicPlatform, geo, ionicDatePicker, sucursal, motivo, hora) {
+.controller('AgendamientoTomarAgendaController', function($ionicPopup, $location, $scope, $rootScope, $ionicPlatform, geo, ionicDatePicker, sucursal, motivo, hora, $cordovaLocalNotification) {
+
 
   $scope.motivosAtencion = [];
   $scope.usandoGeolocalizacion = true;
@@ -82,6 +83,27 @@ angular.module('movistar')
     hora.agendarHora(obtenerTodoFormulario(), function(data){
 
       $scope.agendando = false;
+
+      /*
+      * Formato:
+      {
+        id: 345,
+        title: 'Title here',
+        text: 'Text here',
+        data: {
+          customProperty: 'custom value'
+        },
+        at: new Date()
+      }*/
+      console.log("Cuando se agenda, esto viene del Backend:");
+      console.log(data);
+
+      try {
+        $cordovaLocalNotification.schedule(data.notifications).then(function(){ });
+      } catch(e){
+        console.log("No se pudo planificar notificaciones, probablemente debido a que en PC no funciona.");
+        console.log(e);
+      }
 
       var alertPopup = $ionicPopup.alert({
        title: "Hora agendada",
