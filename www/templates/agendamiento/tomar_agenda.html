@@ -4,7 +4,7 @@
 
     <!-- Motivo de atencion -->
     <div ng-if="paso == 1">
-      <label class="item item-input item-select">
+      <!--<label class="item item-input item-select">
         <div class="input-label">
           Motivo de atención
         </div>
@@ -14,7 +14,13 @@
           </option>
           <option ng-repeat="motivo in motivosAtencion" ng-value="motivo.id">{{ motivo.name }}</option>
         </select>
-      </label>
+      </label>-->
+      <h3>
+        Motivo de atención
+      </h3>
+      <ion-radio class="card" ng-model="motivoAtencionSeleccionado.motivo" ng-repeat="motivo in motivosAtencion" ng-value="motivo.id">
+        <p>{{ motivo.name }}</p>
+      </ion-radio>
 
       <!-- <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button> -->
       <button class="button" ng-click="siguiente()">Siguiente</button>
@@ -34,6 +40,7 @@
         </div>
       </label>
       <!-- <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button> -->
+      <button class="button" ng-click="atras()">Volver</button>
       <button class="button" ng-click="siguiente()">Siguiente</button>
     </div>
 
@@ -117,6 +124,7 @@
       </div>
 
       <!-- <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button> -->
+      <button class="button" ng-click="atras()">Volver</button>
       <button class="button" ng-click="siguiente()">Siguiente</button>
 
     </div>
@@ -143,7 +151,7 @@
           <select ng-model="tiempoElegido.minutoElegido" ng-options="mm for mm in tiempoElegido.horaElegida.mm"></select>
         </label>
 
-
+        <button class="button" ng-click="atras()">Volver</button>
         <button class="button" ng-click="siguiente()">Siguiente</button>
 
       </div>
@@ -175,7 +183,7 @@
           <div class="col">{{ todosDatos.sucursal.full_address }}</div>
       </div>
 
-
+      <button class="button" ng-click="atras()" ng-if="!agendando">Volver</button>
       <button class="button" ng-click="agendar()" ng-if="!agendando">Agendar</button>
       <button class="button" ng-click="agendar()" ng-if="agendando" disabled>Espere...</button>
 

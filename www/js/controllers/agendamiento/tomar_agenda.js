@@ -45,6 +45,10 @@ angular.module('movistar')
 
   $scope.todosDatos = {};
 
+  $scope.atras = function(){
+    $scope.paso--;
+  }
+
   $scope.siguiente = function(){
 
     if(datosValidos($scope.paso)){
