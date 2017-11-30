@@ -85,6 +85,7 @@ angular.module('movistar')
   $scope.agendar = function(){
 
     $scope.agendando = true;
+
     hora.agendarHora(obtenerTodoFormulario(), function(data){
 
       $scope.agendando = false;
@@ -106,7 +107,14 @@ angular.module('movistar')
 
       $location.path('/agendamiento');
 
-    }, function(){ $scope.agendado = false; });
+    }, function(){
+      $scope.agendado = false;
+
+      popUpAlert("La hora ya ha sido tomada");
+
+      $scope.agendando = false;
+
+    });
 
   }
 
