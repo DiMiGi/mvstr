@@ -9,6 +9,13 @@ angular.module('movistar')
       $scope.tieneHoraAgendada = tiene;
     });
 
+    document.getElementById("headerTexto").textContent="Bienvenido";
+    $('#headerIcon').hide();
   });
+
+  $scope.$on('$ionicView.beforeLeave', function(){
+    document.getElementById("headerTexto").textContent="Volver a inicio";
+    $('#headerIcon').show();
+    });
 
 });

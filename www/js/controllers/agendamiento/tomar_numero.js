@@ -6,12 +6,17 @@ angular.module('movistar')
     $scope.motivosAtencion = [];
     $scope.usandoGeolocalizacion = true;
 
+    $scope.paso = 1;
+
+    $scope.ubicacion = {}
+
     $scope.motivoAtencionSeleccionado = {
       motivo: null
     };
     $scope.sucursalElegida = {
       sucursal: null
     };
+
     $scope.todosDatos = {};
 
     $scope.readyAction= false;
@@ -26,6 +31,56 @@ angular.module('movistar')
       return false;
     }
 
+
+    $scope.atras = function(){
+      $scope.paso--;
+    }
+
+    $scope.siguiente = function(){
+
+      if(datosValidos($scope.paso)){
+        $scope.paso++;
+      }
+
+      if($scope.paso == 3){
+        $scope.todosDatos = obtenerTodoFormulario();
+      }
+    }
+
+    function popUpAlert(mensaje){
+      $ionicPopup.alert({
+        title: mensaje
+      });
+    }
+
+    function datosValidos(paso){
+      switch (paso) {
+        /* SELECCION DE MOTIVO DE ATENCIÓN */
+        case 1:
+          if($scope.motivoAtencionSeleccionado.motivo === null){
+            popUpAlert("Seleccione el motivo de atención");
+            return false;
+          }
+          return true;
+          break;
+        /* SELECCION DE REGION, COMUNA Y SUCURSAL */
+        case 2:
+          if($scope.sucursalElegida.sucursal === null){
+            popUpAlert("Asegurese de seleccionar región, comuna y sucursal a la que desea agendar una hora");
+            return false;
+          }
+          if( $scope.sucursalElegida.sucursal.full_address === undefined & $scope.sucursalElegida.sucursal.address !== null){
+            $scope.sucursalElegida.sucursal.full_address = $scope.sucursalElegida.sucursal.address + ", " + $scope.ubicacion.comunaSeleccionada.comuna + ", " + $scope.ubicacion.regionSeleccionada.region;
+          }
+          return true;
+          break;
+        case 3:
+          return true;
+          break;
+        default:
+          return false;
+      }
+    }
 
     $scope.tomaDeNumero = function () {
 
@@ -155,9 +210,9 @@ angular.module('movistar')
           { text: 'Volver', onTap: function(e) { return false; } },
           {
             text: '<b>Si</b>',
-            type: 'button-positive',
+            type: 'button',
             onTap: function(e) {
-              $scope.accionTomaNumero($scope.sucursalElegida.sucursal.address);
+              $scope.accionTomaNumero($scope.sucursalElegida.sucursal.full_address);
             }
           },
         ]

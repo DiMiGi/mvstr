@@ -103,11 +103,14 @@
 
 .bg-color-neutro{ background-color: #FFFFFF !important;}
 
-.ionic_datepicker_modal .selected_date,
 .ionic_datepicker_modal .footer,
 .ionic_datepicker_modal .header,
 .ionic_datepicker_modal .button-clear{
   background-color: #00A9E0 !important;
+}
+
+.ionic_datepicker_modal .selected_date{
+  background-color: #5BC500 !important;
 }
 
 .item-radio input:checked + .radio-content .item-content{

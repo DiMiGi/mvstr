@@ -1,4 +1,5 @@
 <ion-view view-title="Agendar hora">
+  
   <ion-content>
 
 
@@ -95,7 +96,7 @@
           </div>
 
           <!-- ng-change="..." es para que cuando cambie de region, se desmarque la sucursal que estaba elegida -->
-          <select ng-model="regionSeleccionada" ng-options="region as region.region for region in regiones" ng-change="sucursalElegida.sucursal = null"></select>
+          <select ng-model="ubicacion.regionSeleccionada" ng-options="region as region.region for region in regiones" ng-change="sucursalElegida.sucursal = null"></select>
         </label>
 
         <!-- Escoger la comuna -->
@@ -104,11 +105,11 @@
             Comuna
           </div>
           <!-- ng-change="..." es para que cuando cambie de comuna, se desmarque la sucursal que estaba elegida -->
-          <select ng-model="comunaSeleccionada" ng-options="comuna.comuna for comuna in regionSeleccionada.comunas" ng-change="sucursalElegida.sucursal = null"></select>
+          <select ng-model="ubicacion.comunaSeleccionada" ng-options="comuna.comuna for comuna in ubicacion.regionSeleccionada.comunas" ng-change="sucursalElegida.sucursal = null"></select>
         </label>
 
         <!-- Escoger la sucursal -->
-        <div class="item item-text-wrap sucursal-item" ng-repeat="sucursal in comunaSeleccionada.sucursales">
+        <div class="item item-text-wrap sucursal-item" ng-repeat="sucursal in ubicacion.comunaSeleccionada.sucursales">
           <ion-radio class="sucursal-radio" ng-model="sucursalElegida.sucursal" ng-value="sucursal">
             <p>{{ sucursal.address }}</p>
             <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
