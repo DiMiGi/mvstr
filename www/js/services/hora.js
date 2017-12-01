@@ -5,18 +5,18 @@ angular.module('movistar')
   let urlBase = "http://localhost:3000";
 
   function obtenerHoraAgendada(callback){
-    $http.get(`${urlBase}/api/appointments/current?client_id=${login.clientId}`).then(function(response){
+    $http.get(`${urlBase}/api/appointments/current?client_id=${login.client_id}`).then(function(response){
       callback(response.data);
     });
   }
 
 
   function eliminarHora(callback){
-    $http.delete(`${urlBase}/api/appointments/cancel?client_id=${login.clientId}`).then(callback);
+    $http.delete(`${urlBase}/api/appointments/cancel?client_id=${login.client_id}`).then(callback);
   }
 
   function confirmarHora(callback){
-    $http.post(`${urlBase}/api/appointments/confirm_appointment?client_id=${login.clientId}`).then(callback);
+    $http.post(`${urlBase}/api/appointments/confirm_appointment?client_id=${login.client_id}`).then(callback);
   }
 
   function agendarHora(params, callback, errorCallback){
@@ -24,7 +24,7 @@ angular.module('movistar')
     let url = `${urlBase}/api/appointments/schedule_appointment`;
 
     // Esta linea no deberia estar en la aplicacion real:
-    //url += `?client_id=${login.clientId}`;
+    //url += `?client_id=${login.client_id}`;
 
     let p = {
       client: login,
@@ -52,7 +52,7 @@ angular.module('movistar')
     let url = `${urlBase}/api/appointments/${params.yyyy}/${params.mm}/${params.dd}/branch_office/${params.branch_office_id}/attention_type/${params.attention_type_id}`;
 
     // Esta linea no deberia estar en la aplicacion real:
-    url += `?client_id=${login.clientId}`;
+    url += `?client_id=${login.client_id}`;
 
     console.log(url);
 
