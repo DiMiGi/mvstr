@@ -57,7 +57,30 @@ angular.module('movistar')
     console.log(url);
 
     $http.get(url).then(function(response){
-      callback(response.data.times);
+
+      let minutesArray = response.data.times;
+
+      let hourMap = {};
+
+      for(let i=0; i<minutesArray.length; i++){
+        let h = Math.floor(minutesArray[i]/60);
+        let m = minutesArray[i] % 60;
+        if(!hourMap.hasOwnProperty(h)){
+          hourMap[h] = [];
+        }
+        hourMap[h].push(m);
+      }
+
+      let formattedResult = [];
+
+      for(let key in hourMap){
+        formattedResult.push({
+          hh: key,
+          mm: hourMap[key]
+        });
+      }
+
+      callback(formattedResult);
     });
   }
 
