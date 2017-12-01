@@ -101,11 +101,16 @@
 .bg-color-verde{ background-color: #5BC500 !important;}
 .bg-color-gris{ background-color: #86888C !important;}
 
-.ionic_datepicker_modal .selected_date,
+.bg-color-neutro{ background-color: #FFFFFF !important;}
+
 .ionic_datepicker_modal .footer,
 .ionic_datepicker_modal .header,
 .ionic_datepicker_modal .button-clear{
   background-color: #00A9E0 !important;
+}
+
+.ionic_datepicker_modal .selected_date{
+  background-color: #5BC500 !important;
 }
 
 .item-radio input:checked + .radio-content .item-content{
@@ -148,6 +153,11 @@ h3 {
   font-size: 24px;
 }
 
+p {
+  font-family: "Telefonica";>
+  font-size: 12px;
+}
+
 a {
   font-family: "Telefonica_bold",Arial,sans-serif;
 }
@@ -165,6 +175,46 @@ a {
   display: inline-block;
 }
 
+button.button-block, button.button-full, .button-full > button.button, input.button.button-block{
+    width: 97%;
+}
+
+.card{
+  margin: 1px;
+}
+
+.button_card {
+  background-color: #FFFFFF;
+  height: 70px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 10px;
+}
+
+.button_card a{
+  color: #000000;
+  bottom: 0;
+  left: 0;
+}
+
+.button_card a h3,.button_card a p{
+  margin: 0;
+  margin-right: 20px;
+}
+
+.button_card .radio-icon::before{
+  right: 20px;
+  position: absolute;
+}
+
+.back_header{
+  margin-left: 10px;
+  font-size: 35px;
+  position: absolute;
+  left: 10px;
+  top: -20px;
+}
+
 .button:hover {
   color: #FFFFFF;
   text-decoration: none; }
@@ -172,3 +222,12 @@ a {
 .button.active, .button.activated {
   border-color: #B6B7B7;
   background-color: #D3D4D3; }
+
+.popup-buttons .button-default{
+  background-color: #B6B7B7;
+}
+
+/* Esta clase es para eliminar el cuadro plomo https://forum.ionicframework.com/t/an-annoying-little-square-on-android-devices/59529 */
+.scroll-content{
+    overflow-y:auto;
+}

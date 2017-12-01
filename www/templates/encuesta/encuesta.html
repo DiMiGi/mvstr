@@ -1,0 +1,172 @@
+
+<ion-view title="encuesta" hide-back-button="true">
+  <ion-content padding="true" scroll="false" class="has-header">
+
+    <!--button class="button button-block button-positive" ng-click="enviarEvaluacion()" >opinat</button-->
+
+    <div style="padding-left: 12px; padding-right: 12px; font-size: 10px;" >
+      <p><i>Deseamos conocer tu experiencia utilizando la aplicación.</i></p>
+      <div ng-if="slide != preguntas">
+        <p><i>Usando la barra mas abajo, indica tu grado de aprobación correspondiente.</i></p>
+      </div>
+      <div ng-if="slide == preguntas">
+        <p><i>Escriba en el recuadro una acotación o sugerencia referente a la aplicación.</i></p>
+      </div>
+    </div>
+
+    <div ng-if="slide == 1">
+      <div style="padding: 12px" >
+        {{slide}}. ¿Cómo evalúas el uso de las funciones de agendamiento y toma de número en aplicación?
+      </div>
+
+      <div class="range range-positive" >
+        <i class="icon ion-sad-outline"></i>
+        <input type="range" name="calificacion1" value="3" min="1" max="5" step="1"
+               ng-model="rangeValue" ng-change="enableBtn()" >
+        <i class="icon ion-happy-outline"></i>
+      </div>
+
+      <div ng-if="buttonAvailability">
+        <button class="button button-block button-positive" ng-click="addAnswer()">{{buttonName}}</button>
+      </div>
+      <div ng-if="!buttonAvailability">
+        <button class="button button-block button-positive" disabled >{{buttonName}}</button>
+      </div>
+    </div>
+
+    <div ng-if="slide == 2">
+      <div style="padding: 12px" >
+        {{slide}}. ¿Cómo evalúas la facilidad de acceso a las funciones de agendamiento y toma de número en aplicación?
+      </div>
+
+      <div class="range range-positive">
+        <i class="icon ion-sad-outline"></i>
+        <input type="range" name="calificacion2" value="3" min="1" max="5" step="1"
+               ng-model="rangeValue" ng-change="enableBtn()" >
+        <i class="icon ion-happy-outline"></i>
+      </div>
+
+      <div ng-if="buttonAvailability">
+        <button class="button button-block button-positive" ng-click="addAnswer()">{{buttonName}}</button>
+      </div>
+      <div ng-if="!buttonAvailability">
+        <button class="button button-block button-positive" disabled >{{buttonName}}</button>
+      </div>
+    </div>
+
+    <div ng-if="slide == 3">
+      <div style="padding: 12px" >
+        {{slide}}. ¿Cómo evalúas la facilidad de selección de sucursal?
+      </div>
+
+      <div class="range range-positive">
+        <i class="icon ion-sad-outline"></i>
+        <input type="range" name="calificacion3" value="3" min="1" max="5" step="1"
+               ng-model="rangeValue" ng-change="enableBtn()" >
+        <i class="icon ion-happy-outline"></i>
+      </div>
+
+      <div ng-if="buttonAvailability">
+        <button class="button button-block button-positive" ng-click="addAnswer()">{{buttonName}}</button>
+      </div>
+      <div ng-if="!buttonAvailability">
+        <button class="button button-block button-positive" disabled >{{buttonName}}</button>
+      </div>
+    </div>
+
+    <div ng-if="slide == 4">
+      <div style="padding: 12px" >
+        {{slide}}. ¿Cómo evalúas la facilidad de selección de fecha y hora para agendamiento?
+      </div>
+
+      <div class="range range-positive">
+        <i class="icon ion-sad-outline"></i>
+        <input type="range" name="calificacion4" value="3" min="1" max="5" step="1"
+               ng-model="rangeValue" ng-change="enableBtn()" >
+        <i class="icon ion-happy-outline"></i>
+      </div>
+
+      <div ng-if="buttonAvailability">
+        <button class="button button-block button-positive" ng-click="addAnswer()">{{buttonName}}</button>
+      </div>
+      <div ng-if="!buttonAvailability">
+        <button class="button button-block button-positive" disabled >{{buttonName}}</button>
+      </div>
+    </div>
+
+    <div ng-if="slide == 5">
+      <div style="padding: 12px" >
+        {{slide}}. ¿Cómo evalúas la rapidez con que se despliega la información en pantalla?
+      </div>
+
+      <div class="range range-positive">
+        <i class="icon ion-sad-outline"></i>
+        <input type="range" name="calificacion5" value="3" min="1" max="5" step="1"
+               ng-model="rangeValue" ng-change="enableBtn()" >
+        <i class="icon ion-happy-outline"></i>
+      </div>
+
+      <div ng-if="buttonAvailability">
+        <button class="button button-block button-positive" ng-click="addAnswer()">{{buttonName}}</button>
+      </div>
+      <div ng-if="!buttonAvailability">
+        <button class="button button-block button-positive" disabled >{{buttonName}}</button>
+      </div>
+    </div>
+
+    <div ng-if="slide == 6">
+      <div style="padding: 12px" >
+        {{slide}}. ¿Cómo evalúas la facilidad de selección de sucursal?
+      </div>
+
+      <div class="range range-positive">
+        <i class="icon ion-sad-outline"></i>
+        <input type="range" name="calificacion6" value="3" min="1" max="5" step="1"
+               ng-model="rangeValue" ng-change="enableBtn()" >
+        <i class="icon ion-happy-outline"></i>
+      </div>
+
+      <div ng-if="buttonAvailability">
+        <button class="button button-block button-positive" ng-click="addAnswer()">{{buttonName}}</button>
+      </div>
+      <div ng-if="!buttonAvailability">
+        <button class="button button-block button-positive" disabled >{{buttonName}}</button>
+      </div>
+    </div>
+
+    <div ng-if="slide == 7">
+      <div style="padding: 12px" >
+        {{slide}}. ¿Cómo evalúas la facilidad de selección de fecha y hora para agendamiento?
+      </div>
+
+      <div class="range range-positive">
+        <i class="icon ion-sad-outline"></i>
+        <input type="range" name="calificacion7" value="3" min="1" max="5" step="1"
+               ng-model="rangeValue" ng-change="enableBtn()" >
+        <i class="icon ion-happy-outline"></i>
+      </div>
+
+      <div ng-if="buttonAvailability">
+        <button class="button button-block button-positive" ng-click="addAnswer()">{{buttonName}}</button>
+      </div>
+      <div ng-if="!buttonAvailability">
+        <button class="button button-block button-positive" disabled >{{buttonName}}</button>
+      </div>
+    </div>
+
+    <div ng-if="slide == 8">
+      <div style="padding: 12px" >
+        {{slide}}. ¿Tienes algún comentario sobre la aplicación? (Opcional).
+      </div>
+
+      <div class="item wrap">
+        <input type="text" name="calificacion8" class=""
+               ng-model="textValue" ng-maxlength="200" placeholder="Ingrese aquí su comentario" >
+      </div>
+
+      <button class="button button-block button-positive" ng-click="addAnswer()">{{buttonName}}</button>
+
+    </div>
+
+  </ion-content>
+</ion-view>

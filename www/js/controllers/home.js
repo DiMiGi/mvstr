@@ -2,8 +2,10 @@ angular.module('movistar').controller('IndexCtrl', function($scope, login, $cord
   $scope.currentUser = null;
   $scope.form = { clientId: "" };
   $scope.login = function(){
-    var id = +$scope.form.clientId;
-    login.login(id);
+    var id = $scope.form.clientId;
+    var nombres = $scope.form.clientNames;
+    var correo = $scope.form.clientEmail;
+    login.login(id,nombres,correo);
     $scope.currentUser = login.clientId;
   }
 

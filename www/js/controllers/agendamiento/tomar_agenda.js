@@ -2,7 +2,6 @@ angular.module('movistar')
 
 .controller('AgendamientoTomarAgendaController', function($ionicPopup, $location, $scope, $rootScope, $ionicPlatform, geo, ionicDatePicker, sucursal, motivo, hora, $cordovaLocalNotification) {
 
-
   $scope.motivosAtencion = [];
   $scope.usandoGeolocalizacion = true;
   $scope.motivoAtencionSeleccionado = {
@@ -15,8 +14,10 @@ angular.module('movistar')
     minutoElegido: null
   };
 
+  $scope.ubicacion = {}
 
   $scope.paso = 1;
+
 
   // En esta variable se cargan las regiones, con sus comunas y sucursales,
   // para poder escoger manualmente
@@ -44,6 +45,10 @@ angular.module('movistar')
   $scope.horaSeleccionada = null;
 
   $scope.todosDatos = {};
+
+  $scope.atras = function(){
+    $scope.paso--;
+  }
 
   $scope.siguiente = function(){
 
@@ -80,6 +85,7 @@ angular.module('movistar')
   $scope.agendar = function(){
 
     $scope.agendando = true;
+
     hora.agendarHora(obtenerTodoFormulario(), function(data){
 
       $scope.agendando = false;
@@ -101,7 +107,14 @@ angular.module('movistar')
 
       $location.path('/agendamiento');
 
-    }, function(){ $scope.agendado = false; });
+    }, function(){
+      $scope.agendado = false;
+
+      popUpAlert("La hora ya ha sido tomada");
+
+      $scope.agendando = false;
+
+    });
 
   }
 
@@ -134,6 +147,9 @@ angular.module('movistar')
         if($scope.sucursalElegida.sucursal === null){
           popUpAlert("Asegurese de seleccionar región, comuna y sucursal a la que desea agendar una hora");
           return false;
+        }
+        if( $scope.sucursalElegida.sucursal.full_address === undefined & $scope.sucursalElegida.sucursal.address !== null){
+          $scope.sucursalElegida.sucursal.full_address = $scope.sucursalElegida.sucursal.address + ", " + $scope.ubicacion.comunaSeleccionada.comuna + ", " + $scope.ubicacion.regionSeleccionada.region;
         }
         return true;
         break;

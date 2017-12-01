@@ -1,10 +1,11 @@
 <ion-view view-title="Agendar hora">
+  
   <ion-content>
 
 
     <!-- Motivo de atencion -->
     <div ng-if="paso == 1">
-      <label class="item item-input item-select">
+      <!--<label class="item item-input item-select">
         <div class="input-label">
           Motivo de atención
         </div>
@@ -14,7 +15,13 @@
           </option>
           <option ng-repeat="motivo in motivosAtencion" ng-value="motivo.id">{{ motivo.name }}</option>
         </select>
-      </label>
+      </label>-->
+      <h3>
+        Motivo de atención
+      </h3>
+      <ion-radio class="card" ng-model="motivoAtencionSeleccionado.motivo" ng-repeat="motivo in motivosAtencion" ng-value="motivo.id">
+        <p>{{ motivo.name }}</p>
+      </ion-radio>
 
       <!-- <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button> -->
       <button class="button" ng-click="siguiente()">Siguiente</button>
@@ -34,6 +41,7 @@
         </div>
       </label>
       <!-- <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button> -->
+      <button class="button" ng-click="atras()">Volver</button>
       <button class="button" ng-click="siguiente()">Siguiente</button>
     </div>
 
@@ -88,7 +96,7 @@
           </div>
 
           <!-- ng-change="..." es para que cuando cambie de region, se desmarque la sucursal que estaba elegida -->
-          <select ng-model="regionSeleccionada" ng-options="region as region.region for region in regiones" ng-change="sucursalElegida.sucursal = null"></select>
+          <select ng-model="ubicacion.regionSeleccionada" ng-options="region as region.region for region in regiones" ng-change="sucursalElegida.sucursal = null"></select>
         </label>
 
         <!-- Escoger la comuna -->
@@ -97,11 +105,11 @@
             Comuna
           </div>
           <!-- ng-change="..." es para que cuando cambie de comuna, se desmarque la sucursal que estaba elegida -->
-          <select ng-model="comunaSeleccionada" ng-options="comuna.comuna for comuna in regionSeleccionada.comunas" ng-change="sucursalElegida.sucursal = null"></select>
+          <select ng-model="ubicacion.comunaSeleccionada" ng-options="comuna.comuna for comuna in ubicacion.regionSeleccionada.comunas" ng-change="sucursalElegida.sucursal = null"></select>
         </label>
 
         <!-- Escoger la sucursal -->
-        <div class="item item-text-wrap sucursal-item" ng-repeat="sucursal in comunaSeleccionada.sucursales">
+        <div class="item item-text-wrap sucursal-item" ng-repeat="sucursal in ubicacion.comunaSeleccionada.sucursales">
           <ion-radio class="sucursal-radio" ng-model="sucursalElegida.sucursal" ng-value="sucursal">
             <p>{{ sucursal.address }}</p>
             <p><small>Horario abierto 9:00AM - 14:00PM</small></p>
@@ -117,6 +125,7 @@
       </div>
 
       <!-- <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button> -->
+      <button class="button" ng-click="atras()">Volver</button>
       <button class="button" ng-click="siguiente()">Siguiente</button>
 
     </div>
@@ -143,7 +152,7 @@
           <select ng-model="tiempoElegido.minutoElegido" ng-options="mm for mm in tiempoElegido.horaElegida.mm"></select>
         </label>
 
-
+        <button class="button" ng-click="atras()">Volver</button>
         <button class="button" ng-click="siguiente()">Siguiente</button>
 
       </div>
@@ -175,7 +184,7 @@
           <div class="col">{{ todosDatos.sucursal.full_address }}</div>
       </div>
 
-
+      <button class="button" ng-click="atras()" ng-if="!agendando">Volver</button>
       <button class="button" ng-click="agendar()" ng-if="!agendando">Agendar</button>
       <button class="button" ng-click="agendar()" ng-if="agendando" disabled>Espere...</button>
 

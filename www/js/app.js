@@ -48,8 +48,12 @@ angular.module('movistar', ['ionic', 'ngCordova', 'ionic-datepicker'])
    .state('agendamiento', { url: '/agendamiento', templateUrl: 'templates/agendamiento/home.html', controller: "AgendamientoHomeController" })
    .state('agendamiento_tomar_agenda', { url: '/agendamiento/agenda', templateUrl: 'templates/agendamiento/tomar_agenda.html', controller: "AgendamientoTomarAgendaController" })
    .state('agendamiento_tomar_numero', { url: '/agendamiento/numero', templateUrl: 'templates/agendamiento/tomar_numero.html', controller: "AgendamientoTomarNumeroController" })
-   .state('agendamiento_ver_hora_agendada', { url: '/agendamiento/agenda/ver_hora', templateUrl: 'templates/agendamiento/ver_hora_agendada.html', controller: "AgendamientoVerHoraAgendadaController" });
-
+   .state('agendamiento_ver_hora_agendada', { url: '/agendamiento/agenda/ver_hora', templateUrl: 'templates/agendamiento/ver_hora_agendada.html', controller: "AgendamientoVerHoraAgendadaController" })
+   .state('encuesta_satisfaccion', {
+     url: '/encuesta_satisfaccion',
+     templateUrl: 'templates/encuesta/encuesta.html',
+     controller: "encuestaCtrl"
+   });
    $urlRouterProvider.otherwise('/');
 });
 

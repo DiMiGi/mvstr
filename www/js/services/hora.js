@@ -24,9 +24,10 @@ angular.module('movistar')
     let url = `${urlBase}/api/appointments/schedule_appointment`;
 
     // Esta linea no deberia estar en la aplicacion real:
-    url += `?client_id=${login.clientId}`;
+    //url += `?client_id=${login.clientId}`;
 
     let p = {
+      cliente: login,
       hour: params.hora,
       minutes: params.minutos,
       yyyy: params.yyyy,
@@ -35,7 +36,6 @@ angular.module('movistar')
       attention_type_id: params.motivo.id,
       branch_office_id: params.sucursal.id
     };
-
 
     $http.post(url, p).then(function(response){
       if(response.status == 200){

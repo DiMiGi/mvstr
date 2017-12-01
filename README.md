@@ -49,3 +49,9 @@ ionic cordova run android
 ```
 
 En caso de recibir errores por licencias, ver esta pregunta en StackOverflow https://stackoverflow.com/questions/40383323/cant-accept-license-agreement-android-sdk-platform-24/40383457#40383457 para resolverlo.
+
+En caso que haya problema con cordova-plugin-local-notification usar el siguiente comando en la consola:
+cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications.git --nofetch
+
+En caso que no corra al ejecutar el proceso daemon:
+https://stackoverflow.com/questions/40385165/ionic-android-build-failed-unable-to-start-the-daemon-process

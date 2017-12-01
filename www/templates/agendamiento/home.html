@@ -1,7 +1,20 @@
-<ion-view view-title="Agendar hora o numero, menu principal">
+<ion-view view-title="Agendar hora o numero, menu principal" hide-nav-bar="true">
   <ion-content>
 
     <div class = "list">
+
+      <div class="card">
+
+
+        <div class="row wrap">
+          Detalles de su solicitud Vigente:
+        </div>
+
+        <button class="button button-full" ui-sref="encuesta_satisfaccion"
+                style="font-size: 11px;">
+          ENCUESTA DE SATISFACCIÓN PENDIENTE
+        </button>
+      </div>
 
       <!-- Agenda -->
 
@@ -14,20 +27,38 @@
 
       <!-- Tiene hora agendada -->
 
-      <div ng-show="tieneHoraAgendada == true">
+      <div class= "card" ng-show="tieneHoraAgendada == true">
+        <div class="radio-content button_card" ui-sref="agendamiento_ver_hora_agendada">
+          <a>
+            <h3>Ver hora agendada </h3>
+            <div class="radio-icon icon ion-chevron-right"></div>
+            <p>Si deseas otra hora puedes cancelar o reagendar la hora tomada. </p>
+          </a>
+        </div>
+
+<!--
         <div class="row">
           <p>Usted solo puede agendar una hora simultaneamente. Si desea otra hora, puede cancelar o reagendar la hora tomada.</p>
         </div>
-        <button class="button" ui-sref="agendamiento_ver_hora_agendada">Ver hora agendada</button>
+        <button class="button" ui-sref="agendamiento_ver_hora_agendada">Ver hora agendada</button>-->
       </div>
 
       <!-- No tiene hora agendada -->
 
-      <div ng-show="tieneHoraAgendada == false">
-        <div class="row">
-          <p>Desea agendar una hora?</p>
+      <div class="card" ng-show="tieneHoraAgendada == false">
+        <div class="radio-content button_card" ui-sref="agendamiento_tomar_agenda">
+          <a>
+            <h3>Agendar hora </h3>
+            <div class="radio-icon icon ion-chevron-right"></div>
+            <p>Selecciona esta opción si iras dentro de los proximos  días </p>
+
+          </a>
+          <!--</div>
+          <div class="row">
+            <p>Desea agendar una hora?</p>
+          </div>
+          <button class="button" ui-sref="agendamiento_tomar_agenda">Agendar hora</button>-->
         </div>
-        <button class="button" ui-sref="agendamiento_tomar_agenda">Agendar hora</button>
       </div>
 
 
@@ -35,15 +66,36 @@
 
 
       <!-- Toma de numero -->
+    <div class="card" ng-show="tieneHoraAgendada == false">
 
-      <div class="row">
+      <div class="radio-content button_card" ui-sref="agendamiento_tomar_numero">
+        <a>
+          <h3>Tomar número </h3>
+          <div class="radio-icon icon ion-chevron-right"></div>
+          <p>Selecciona esta opción si vas hoy a la sucursal </p>
+
+        </a>
+      </div>
+
+
+      <!--<div class="row">
         Prefiero tomar un número
       </div>
 
       <button class="button" ui-sref="agendamiento_tomar_numero">Tomar número</button>
+    -->
 
 
+    </div>
+    <div class="card">
+      <div class="radio-content button_card" ui-sref="index">
+        <a>
+          <h3>Simular paso de usuario </h3>
+          <div class="radio-icon icon ion-chevron-right"></div>
+          <p>Selecciona esta opción para ingresar un cliente </p>
 
+        </a>
+      </div>
     </div>
 
   </ion-content>
