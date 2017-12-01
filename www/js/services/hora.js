@@ -27,7 +27,7 @@ angular.module('movistar')
     //url += `?client_id=${login.clientId}`;
 
     let p = {
-      cliente: login,
+      client: login,
       hour: params.hora,
       minutes: params.minutos,
       yyyy: params.yyyy,

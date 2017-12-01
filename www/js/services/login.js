@@ -4,14 +4,14 @@ angular.module('movistar')
 
   var o = {};
 
-  o.clientId = null;
-  o.clientNames = null;
-  o.clientEmail = null;
+  o.client_id = null;
+  o.client_names = null;
+  o.client_email = null;
 
   o.login = function(id,nombres,email){
-    o.clientId = id;
-    o.clientNames = nombres;
-    o.clientEmail = email;
+    o.client_id = id;
+    o.client_names = nombres;
+    o.client_email = email;
   }
 
   return o;
