@@ -5,18 +5,18 @@ angular.module('movistar')
   let urlBase = "http://localhost:3000";
 
   function obtenerHoraAgendada(callback){
-    $http.get(`${urlBase}/api/appointments/current?client_id=${login.clientId}`).then(function(response){
+    $http.get(`${urlBase}/api/appointments/current?client[client_id]=${login.clientId}`).then(function(response){
       callback(response.data);
     });
   }
 
 
   function eliminarHora(callback){
-    $http.delete(`${urlBase}/api/appointments/cancel?client_id=${login.clientId}`).then(callback);
+    $http.delete(`${urlBase}/api/appointments/cancel?client[client_id]=${login.clientId}`).then(callback);
   }
 
   function confirmarHora(callback){
-    $http.post(`${urlBase}/api/appointments/confirm_appointment?client_id=${login.clientId}`).then(callback);
+    $http.post(`${urlBase}/api/appointments/confirm_appointment?client[client_id]=${login.clientId}`).then(callback);
   }
 
   function agendarHora(params, callback, errorCallback){
@@ -52,12 +52,35 @@ angular.module('movistar')
     let url = `${urlBase}/api/appointments/${params.yyyy}/${params.mm}/${params.dd}/branch_office/${params.branch_office_id}/attention_type/${params.attention_type_id}`;
 
     // Esta linea no deberia estar en la aplicacion real:
-    url += `?client_id=${login.clientId}`;
+    url += `?client[client_id]=${login.clientId}`;
 
     console.log(url);
 
     $http.get(url).then(function(response){
-      callback(response.data.times);
+
+      let minutesArray = response.data.times;
+
+      let hourMap = {};
+
+      for(let i=0; i<minutesArray.length; i++){
+        let h = Math.floor(minutesArray[i]/60);
+        let m = minutesArray[i] % 60;
+        if(!hourMap.hasOwnProperty(h)){
+          hourMap[h] = [];
+        }
+        hourMap[h].push(m);
+      }
+
+      let formattedResult = [];
+
+      for(let key in hourMap){
+        formattedResult.push({
+          hh: key,
+          mm: hourMap[key]
+        });
+      }
+
+      callback(formattedResult);
     });
   }
 

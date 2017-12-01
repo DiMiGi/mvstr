@@ -10,17 +10,6 @@ angular.module('movistar')
   };
 
 
-  $scope.horasPosibles = [
-    {
-      hh: 8,
-      mm: [0, 15, 45]
-    },
-    {
-      hh: 10,
-      mm: [15, 30]
-    }
-  ];
-
   $scope.tiempoElegido = {
     horaElegida: {},
     minutoElegido: null
@@ -34,6 +23,17 @@ angular.module('movistar')
   $scope.regiones = null;
 
   $scope.tiemposLibres = null;
+  /* Ejemplo:
+  [
+    {
+      hh: 8,
+      mm: [0, 15, 45]
+    },
+    {
+      hh: 10,
+      mm: [15, 30]
+    }
+  ];*/
 
   $scope.sucursalElegida = {
     sucursal: null
