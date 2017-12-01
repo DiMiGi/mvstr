@@ -3,7 +3,7 @@
 
   <!-- -->
 
-  <ion-content ng-show="estado == 'EXITO'">
+  <ion-content ng-show="estado == 'EXITO' && !reagendando">
 
     <div ng-show="horaAgendada != null">
       <div class="row">
@@ -27,11 +27,57 @@
       </div>
 
       <div class="row">
-        <button class="button"><i class="icon ion-calendar"></i> Reagendar</button>
+        <button class="button" ng-click="reagendandoMiHora()"><i class="icon ion-calendar"></i> Reagendar</button>
         <button class="button" ng-if="confirmable"><i class="icon ion-calendar"></i> Confirmar asistencia</button>
         <button class="button button-assertive" ng-click="eliminarMiHora()"><i class="icon ion-close"></i> Eliminar</button>
       </div>
 
+    </div>
+
+  </ion-content>
+
+  <ion-content ng-show="estado == 'EXITO' && reagendando">
+    <div ng-if="paso == 1">
+      <label class="item">
+        <div class="col text-center">
+          <!-- <button class="button button-block" ng-click="openDatePicker()"> -->
+          <button class="button" ng-click="openDatePicker()">
+            <i class="icon ion-calendar"></i>
+            <span ng-show="fechaSeleccionada == null">Seleccione día</span>
+            <span ng-show="fechaSeleccionada != null">{{ fechaSeleccionada | date:'dd MMMM yyyy' }}</span>
+          </button>
+        </div>
+      </label>
+      <!-- <button class="button button-block button-positive" ng-click="siguiente()">Siguiente</button> -->
+      <button class="button" ng-click="cancelar()">Cancelar</button>
+      <button class="button" ng-click="siguiente()">Siguiente</button>
+    </div>
+
+    <div ng-if="paso == 2">
+
+      <p ng-if="tiemposLibres == null"><ion-spinner></ion-spinner> Por favor espere....</p>
+      <p ng-if="tiemposLibres != null && tiemposLibres.length == 0">No hay tiempos libres para agendar. Pruebe otro dia.</p>
+
+      <div ng-if="tiemposLibres != null && tiemposLibres.length > 0">
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Hora
+          </div>
+          <select ng-model="tiempoElegido.horaElegida" ng-options="hh as hh.hh for hh in tiemposLibres"></select>
+        </label>
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Minuto
+          </div>
+          <select ng-model="tiempoElegido.minutoElegido" ng-options="mm for mm in tiempoElegido.horaElegida.mm"></select>
+        </label>
+
+        <button class="button" ng-click="atras()">Volver</button>
+        <button class="button" ng-click="siguiente()">Reagendar</button>
+
+      </div>
     </div>
 
   </ion-content>

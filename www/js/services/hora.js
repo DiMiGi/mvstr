@@ -19,6 +19,22 @@ angular.module('movistar')
     $http.post(`${urlBase}/api/appointments/confirm_appointment?client_id=${login.client_id}`).then(callback);
   }
 
+  function reagendarHora(params, callback){
+
+    let url = `${urlBase}/api/appointments/reschedule_appointment`;
+
+    p = {
+     client: login,
+     hour: params.hora,
+     minutes: params.minutos,
+     yyyy: params.yyyy,
+     mm: params.mm,
+     dd: params.dd
+    }
+
+    $http.post(url,p).then(callback);
+  }
+
   function agendarHora(params, callback, errorCallback){
 
     let url = `${urlBase}/api/appointments/schedule_appointment`;
@@ -90,5 +106,5 @@ angular.module('movistar')
     });
   }
 
-  return { obtenerHoraAgendada, tieneHoraAgendada, eliminarHora, obtenerHorasLibres, agendarHora };
+  return { obtenerHoraAgendada, tieneHoraAgendada, reagendarHora, eliminarHora, obtenerHorasLibres, agendarHora };
  });
